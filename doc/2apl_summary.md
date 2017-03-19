@@ -3,14 +3,20 @@
 # Beliefs
 
 ```prolog
-Beliefs:  pos(1,1).  hasGold(0).  trash(2,5).  trash(6,8).  clean(blockWorld) :- not trash(_,_).
+Beliefs:
+  pos(1,1).
+  hasGold(0).
+  trash(2,5).
+  trash(6,8).
+  clean(blockWorld) :- not trash(_,_).
 ```
 
 Agent believes that is in position (1,1), has no gold, there are two trashes and blockworld is clean when no trash everywhere
 
 # Goals
 ```prolog
-Goals: hasGold(5) and clean(blockworld) , hasGold(10)
+Goals:
+ hasGold(5) and clean(blockworld) , hasGold(10)
 ```
 
 Agent with two goals, one in which has 5 gold and the environment is clean, and the second one in which has 10 gold.
@@ -72,12 +78,14 @@ An external action is supposed to change the state of an external environment. I
 
 Basic actions composed by sequence/conditional/iterator operator:
 
-* sequence: [$$\pi_1$$;$$\pi_2$$]
-* iterator: while $$\phi$$ do $$\pi_1$$
-* conditional: if $$\phi$$ then $$\pi_1$$ else $$\pi_2$$
+* sequence: [$\pi_1$;$\pi_2$]
+* iterator: while $\phi$ do $\pi_1$
+* conditional: if $\phi$ then $\pi_1$ else $\pi_2$
 
 ```prolog
-Plans:  [@blockworld(enter(5,5,red),L);ChgPos(5,5)], % Two actions of a plan  send(admin,request,register(me)) % single action
+Plans:
+  [@blockworld(enter(5,5,red),L);ChgPos(5,5)], % Two actions of a plan
+  send(admin,request,register(me)) % single action
 ```
 
 # Practical reasoning rules
@@ -92,7 +100,9 @@ Three kinds of PRR:
 A planning goal rule is of the form: `[ ⟨goalquery⟩ ] "<-" ⟨belquery⟩ "|" ⟨plan⟩`
 
 ```prolog
-PG-rules:  clean(R) <- pos(X1,Y1) and trash(X2,Y2) |                      {[goTo(X1,Y1,X2,Y2);RemoveTrash()]}
+PG-rules:
+  clean(R) <- pos(X1,Y1) and trash(X2,Y2) |
+                      {[goTo(X1,Y1,X2,Y2);RemoveTrash()]}
 ```
 
 Note that this rule can be applied if (beside the satisfaction of the belief condition) the agent has a conjunctive goal hadGold(5) and clean(blockworld) since the head of the rule is entailed by this goal.
@@ -109,14 +119,22 @@ The procedure call rule is introduced for various reasons and purposes:
 PC-rules:
   % Message type: if an agent A informs that there is some gold at position (X2,Y2) 
   % and the agent believes it does not carry a gold item, then the agent has to get 
-  % and store the gold item in the depot  message(A,inform,La,On,goldAt(X2,Y2)) <-  not carry(gold) |         { getAndStoreGold(X2,Y2) }
+  % and store the gold item in the depot
+  message(A,inform,La,On,goldAt(X2,Y2)) <-  not carry(gold) |
+         { getAndStoreGold(X2,Y2) }
   % Event type: if the environment blockworld notifies the agent that there is some 
   % gold at position (X2,Y2) and the agent believes it does not carry a gold item, 
-  % then the agent has to do the same, i.e., get and store the gold item in the depot  event(gold(X2,Y2),blockworld) <-  not carry(gold) |        { getAndStoreGold(X2,Y2) }
+  % then the agent has to do the same, i.e., get and store the gold item in the depot
+  event(gold(X2,Y2),blockworld) <-  not carry(gold) |
+        { getAndStoreGold(X2,Y2) }
   % this rule indicates that the abstract action getAndStoreGold should be performed as a certain sequence 
   % of actions, i.e., go from its current position (obtained through the condition of the rule) to the gold 
   % position, pick up the gold item, go to the depot position (i.e., position (3,3)), and store the gold 
-  % item in the depot.   getAndStoreGold(X,Y) <- pos(X1,Y1) |        { [goTo(X1,Y1,X,Y);@blockworld(pickup(),_);PickUp();           goTo(X,Y,3,3);@blockworld(drop(),_);StoreGold()]        }
+  % item in the depot. 
+  getAndStoreGold(X,Y) <- pos(X1,Y1) |
+        { [goTo(X1,Y1,X,Y);@blockworld(pickup(),_);PickUp();
+           goTo(X,Y,3,3);@blockworld(drop(),_);StoreGold()]
+        }
 ```
 
 ## Plan repair rules (PR-rules)
