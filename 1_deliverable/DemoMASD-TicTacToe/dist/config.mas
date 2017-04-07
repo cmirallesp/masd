@@ -1,0 +1,10 @@
+<apaplmas>
+    
+    <environment name="tictactoe" file="Environment2APL.jar">
+        <!-- <parameter key="" value="" /> -->
+    </environment>
+    
+    <!--<agent name="player-X" file="player-X.2apl"/>-->
+    <agent name="player1" file="player.2apl"/>
+    <agent name="player2" file="player.2apl"/>
+</apaplmas>

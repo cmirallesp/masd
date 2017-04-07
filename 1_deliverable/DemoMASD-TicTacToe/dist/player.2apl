@@ -1,0 +1,130 @@
+
+beliefs:
+    opponent(x, o).
+        
+    opponent(o, x).
+
+    equal(X, X, X, X).
+
+    nth0(0, [Head|_], Head):- !.
+
+    nth0(Idx, [_|Tail], Result):-
+        is(Jdx, Idx-1),
+        nth0(Jdx, Tail, Result).
+    
+    emptyBoard([' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']).
+
+    win(Player, [A1, A2, A3, B1, B2, B3, C1, C2, C3]):- equal(A1, A2, A3, Player);
+                                                        equal(B1, B2, B3, Player);
+                                                        equal(C1, C2, C3, Player);
+                                                        equal(A1, B1, C1, Player);
+                                                        equal(A2, B2, C2, Player);
+                                                        equal(A3, B3, C3, Player);
+                                                        equal(A1, B2, C3, Player);
+                                                        equal(A3, B2, C1, Player).
+    win(Player):-
+        board(Board),
+        win(Player, Board).
+        
+    acquiredPlayerId:- me(_).
+
+    replace([_|Tail], 0, New, [New|Tail]).
+
+    replace([Head|Tail], Idx, New, [Head|Result]):-
+        is(Jdx, Idx-1),
+        replace(Tail, Jdx, New, Result), !.
+
+    replace(L, _, _, L).
+
+    availableCells([], [], _):- !.
+
+    availableCells([' '|Tail], [Idx|Result], Idx):-
+        !, is(Jdx, Idx+1),
+        availableCells(Tail, Result, Jdx).
+
+    availableCells([_|Tail], Result, Idx):-
+        is(Jdx, Idx+1),
+        availableCells(Tail, Result, Jdx).
+
+    availableCells(Board, Result):-
+        availableCells(Board, Result, 0).
+
+    randomChoice(List, X):-
+        length(List, Length),
+        is(Idx, int(random(Length))),
+        nth0(Idx, List, X).
+
+    randomAvailableCell(Board, X):-
+        availableCells(Board, Available),
+        randomChoice(Available, X).
+
+    winningMove(Player, Board, X):-
+        availableCells(Board, Available),
+        member(X, Available),
+        replace(Board, X, Player, BoardAfter),
+        win(Player, BoardAfter).
+
+goals:
+    acquiredPlayerId.
+
+beliefupdates:
+
+    { board(OldBoard), turn(OldTurn) } UpdateGame(NewBoard, NewTurn) { not board(OldBoard), not turn(OldTurn), board(NewBoard), turn(NewTurn) }
+    { turn(First), opponent(First, Second) } PassTurn() { not turn(First), turn(Second) }
+    { not(me(_)) } AssignIdentity(Player) { me(Player) }
+
+pgrules:    
+    win(Player) <- turn(Player) |
+    {
+        B(board(Board));
+        B(winningMove(Player, Board, X));
+        @tictactoe(play(X), _);
+        PassTurn();
+    }
+    
+    acquiredPlayerId <- true |
+    {
+        @tictactoe(acquirePlayerId(), Player);
+        AssignIdentity(Player);
+    }
+
+pcrules:
+    event(newTurn(Board, Turn), tictactoe) <- true |
+    {
+        UpdateGame(Board, Turn);
+        B(me(Player));
+        if B(emptyBoard(Board))
+        {
+            adoptz(win(Player));
+        }
+    }
+ 
+prrules:
+    UpdateGame(Board, Turn); REST; <- true |
+    {
+        +board(Board);
+        +turn(Turn);
+        REST;
+    }
+
+    B(winningMove(Opponent, Board, X)); REST; <- me(Player) and opponent(Player, Opponent) |
+    {
+        if B(emptyBoard(Board)) then
+        {
+            % Choose the first movement from the corners and the center.
+            B(randomChoice([0, 2, 4, 6, 8], X));
+        }
+        else
+        {
+            B(randomAvailableCell(Board, X));
+        }
+        REST;
+    }
+    
+    B(winningMove(Player, Board, X)); REST; <- me(Player) |
+    {   
+        B(opponent(Player, Opponent));
+        B(winningMove(Opponent, Board, X));
+        REST;
+    }
+    
