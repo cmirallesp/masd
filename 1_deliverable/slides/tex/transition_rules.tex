@@ -1,0 +1,38 @@
+	%------------------------------------------------
+	\begin{frame}
+		\Huge{\centerline{Multi-Agent transition rules}}
+	\end{frame}
+	
+	%------------------------------------------------
+	
+	\begin{frame}
+		\frametitle{Multi-Agent transition rules (I)}
+		
+		\begin{block}{Basic Actions}
+			$\frac{A_i \rightarrow A^{\prime}_i}{\{A_1,...,A_i,..,A_n,\chi\} \rightarrow \{A_1,...,A^{\prime}_i,..,A_n,\chi\}}$, this is, basic actions of agent $i$ do not affect the environment nor other agents 
+		\end{block}
+		
+		\begin{block}{External Actions (I)}
+			$\frac{F^{env}_{\iota,\alpha}(t_1,...,t_n,\chi) = (t, \chi^\prime)}{ \chi \xrightarrow[]{env(\iota,\alpha(t_1,...,t_n),t)} \chi^\prime}$, this is, when an external action is broadcasted, the environment can make a transition according to it
+		\end{block}
+		
+		\begin{block}{External Actions (II)}
+			$\frac{ A_i \xrightarrow[]{env(\iota,\alpha(t_1,...,t_n),t)} A^\prime_i \&\& \chi \xrightarrow[]{env(\iota,\alpha(t_1,...,t_n),t)} \chi^\prime}{\{A_1,...,A_i,..,A_n,\chi\} \rightarrow \{A_1,...,A^{\prime}_i,..,A_n,\chi^\prime\} }$, this is, if a external action by agent $A_i$ changes the environment, it can be the only one noticing it
+		\end{block}
+		
+	\end{frame}
+	
+	%------------------------------------------------
+	
+	\begin{frame}
+		\frametitle{Multi-Agent transition rules (II)}
+		
+		\begin{block}{Internal environment dynamics}
+			$\frac{ env \in \chi \& env \xrightarrow{(\theta,(k,...,l))!} env^\prime}{\{A_1,...,A_i,..,A_n,\chi\} \rightarrow \{A^\prime_1,...,A^{\prime}_i,..,A^\prime_n,\chi^\prime\} }$, this is, which agents receives an event is the decision of the environment designer
+		\end{block}
+		
+		\begin{block}{Message passing}
+			$ \frac{A_i \xrightarrow[]{\varphi!} A^\prime_i \& A_j \xrightarrow[]{\varphi?} A^\prime_j}{\{A_1,...,A_i,A_j,...,A_n,\chi\} \rightarrow \{A^\prime_1,...,A^{\prime}_i,A^\prime_j,...,A^\prime_n,\chi^\prime\} } $, this is, when an agent sends a message to another agent, both transitions (send and receive) are done synchronously
+		\end{block}
+		
+	\end{frame}

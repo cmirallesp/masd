@@ -1,0 +1,222 @@
+\section{Language Elements}
+%------------------------------------------------
+\begin{frame}
+	\Huge{\centerline{Language elements}}
+\end{frame}
+
+%------------------------------------------------
+\subsection{Beliefs \& Goals}
+  \begin{frame}
+    \frametitle{Beliefs}
+    \begin{block}{Definition}
+      Information available to agent, expressed as facts and rules in Prolog. All facts are assumed to be ground.
+    \end{block}
+    \begin{block}{Syntax}
+      Beliefs: \\ 
+      \tab  pos(1,1).\\
+      \tab hasGold(0).\\
+      \tab trash(2,3).\\
+      \tab clean(blockworld) :- not trash(\_,\_).
+    \end{block}
+  \end{frame}
+  
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Goals}
+    \begin{block}{Definition}
+      List of logical formulas, each of which denoting a task the agent wants to accomplish (not necessary all at once).
+    \end{block}
+    \begin{block}{Syntax}
+      Goals: \\
+      \tab  hasGold(5) and clean(blockworld), hasGold(10) \\~\\
+      (G1) agent gets 5 units of gold and the blockworld is clean \\ 
+      (G2) the agent gets 10 units of gold (regardless the blockworld state)
+    \end{block}
+  \end{frame}
+  
+\subsection{Actions}  
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Actions (I)}
+    \begin{itemize}
+      \item \textbf{Capabilities} of an agent \\~\\
+      \item \textbf{Passive} entities, \textbf{activated} in reasoning rules and plans\\~\\
+      \item There are 5 kinds of:\\~\\
+      \begin{itemize}
+        \item Update beliefs\\~\\
+        \item Goals management \\~\\
+        \item Agent communication\\~\\
+        \item Beliefs and Goals queries\\~\\
+        \item Environment interaction
+      \end{itemize}
+    \end{itemize}
+  \end{frame}
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Actions (II)}
+    \begin{block}{Update beliefs: \{Pre\} Action \{Post\}}
+      BeliefUpdates:\\
+      \tab \{not carry(gold)\} \textbf{PickUp()} \{carry(gold)\}\\
+      \tab \{trash(X,Y) and pos(X,Y)\} \textbf{RemoveTrash()} \{not trash(X,Y)\}
+    \end{block} 
+
+    \begin{block}{Goals dynamics: adopt/drop}
+      adopta($\phi$), adoptz($\phi$) : Add the goal $\phi$ at the begining/end.\\~\\
+      dropgoal($\phi$), dropsubgoal($\phi$), dropsupergoal($\phi$): drop goal $\phi$, all subgoals of $\phi$ and all supergoals of $\phi$.
+    \end{block}
+    
+  \end{frame}
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Actions (III)}
+     \begin{block}{Agent communication: send}
+    	send(Receiver,Performative, Language,Ontology,Content)\\
+    	
+    	send(Receiver,Performative,Content). Simplified when is assumed a Language \& Ontology between agents.
+    \end{block}
+        
+    \begin{block}{Test beliefs and goals: B()/G()}
+      To check whether an agent has a belief/goal. \\ 
+      Beliefs:\tab p(a)\\
+      Goals:\tab q(b)\\~\\
+      B(p(X)) \& G(q(X)) \textbf{Fails} (not unifier), block the execution of the plan\\
+      B(p(X) \& G(q(Y)) \textbf{Success} \{X/a, Y/b\}, instantiate variables in subsequent actions in the plan. 
+    \end{block}
+  \end{frame}
+  \begin{frame}
+	\begin{block}{Environment interaction: @env(ActionName,Return)}
+		env: Java class.\\
+		ActionName: method that modifies the environment.\\
+		Return: List of result values or empty list\\~\\
+		
+		@blockworld(east(),L): go one step east in the blockworld environment.
+	\end{block}	
+  \end{frame}
+  
+  %------------------------------------------------
+
+\subsection{Plans and Reasoning Rules}
+  
+  
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Plans}
+    \begin{itemize}
+      \item \textbf{Imperative} constructions to achieve the goals of an agent \\~\\
+      \item Sequence of actions composed by sequence/conditional/loop operator \\~\\
+      \item Initial plan: how to start\\~\\
+      \item Goal Plans: How to achieve goals\\~\\
+      \item Recovery Plans: backup plans\\~\\
+      \item Procedure Plans: plans for external events or input messages or abstract actions\\~\\
+    \end{itemize}
+  \end{frame}
+  
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Plans}
+    \begin{block}{Initial Plan}
+      Plans:\\
+      \tab $[@blockworld(enter(5,5,red),L);ChPos(5,5) ]$\\
+      \tab $send(admin,request,register(me))$\\~\\
+      Updates my beliefs base with initial position 5,5 after entering into the blockworld ($[]$Atomic). \\
+      Request the administrator to register him.
+    \end{block}
+  \end{frame}
+ % ------------------------------------------------
+  \begin{frame}
+    \frametitle{Planning goal rules (PG-Rules)}
+    \begin{block}{Syntax}
+      $[<goalquery>]\leftarrow\ <belquery> | <plan> $ \\
+      \begin{itemize}
+      	{\small
+        \item Generates a plan if agent has goals in goalquery and fulfill belief conditions.
+        \item Goal is optional which means that a plan can be generated only based on beliefs conditions.
+	    }
+      \end{itemize}
+    \end{block}
+    
+    \begin{block}{Example}
+    {\small
+      PG-Rules:\\
+      \tab $clean(R)\leftarrow \ pos(X1,Y1)\ and\ trash(X2,Y2)\ |$ 
+      \tab \tab $\left\{[goto(X1,Y1,X2,Y2); RemoveTrash()]\right\} $ \\
+    }
+      \begin{itemize}{\small
+        \item If agent has the clean goal and it beliefs that there are trash in X2,Y2 then a plan is generated for going from X1,Y1 to X2,Y2 and remove the trash
+        \item goto() is an abstract action (next section)
+	  }
+      \end{itemize}
+    \end{block}
+    
+  \end{frame}
+  
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Procedure call Rules (PC-Rules)}
+    \begin{block}{Definition}
+      It allows generate plans as response to:
+      \begin{itemize}
+        \item \textbf{messages} sent by other agents 
+        \item \textbf{events} generated by external environment 
+        \item \textbf{the execution} of abstract actions
+      \end{itemize}
+    \end{block}
+    
+    \begin{block}{Example}{\small
+      PC-rules:\\
+      \tab message(A,inform,La,On,goldAt(X2,Y2)) $\leftarrow$  not carry(gold) $|$\\
+      \tab \tab \tab \{ getAndStoreGold(X2,Y2) \}\\
+      \tab event(gold(X2,Y2),blockworld) $\leftarrow$  not carry(gold) $|$\\
+      \tab \tab \tab \{ getAndStoreGold(X2,Y2) \}\\ 
+      \tab getAndStoreGold(X,Y) $\leftarrow$ pos(X1,Y1) $|$ \{ \\
+      \tab \tab  $[$ goTo(X1,Y1,X,Y);@blockworld(pickup(),\_); PickUp(); \\
+      \tab \tab  goTo(X,Y,s3,s3);@blockworld(drop(),\_);StoreGold() $]$ \} }
+    \end{block}
+  \end{frame}
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Plan repair Rules (PR-Rules)}
+    \begin{block}{Definition}
+      $<plan>\leftarrow\ <belquery> | <plan> $ \\~\\
+
+      A plan fails if:
+      \begin{itemize}{\small
+        \item The precondition of a belief update action is not entailed by the belief base
+        \item If there is not applicable procedure rule for an abstract action
+        \item If an external actions throws an ExternalActionFailedException
+        \item The agent doesn't have access to an external environment 
+        \item An external action is not defined for an environment
+        \item A test expression is not entailed by the belief and goal bases
+        \item A goal being adopted that is already in the belief base or the goal is not ground
+        \item An atomic plan if one action of the plan fails}
+      \end{itemize} 
+    \end{block}
+  \end{frame}
+  
+  %------------------------------------------------
+  \begin{frame}
+    \frametitle{Plan repair Rules (PR-Rules)}
+    \begin{block}{Example}
+      PR-Rules:\\
+      \tab $@blockworld(east(),\_);@blockworld(east(),\_);X \leftarrow true | $\\
+      \tab \tab $\{ @blockworld(north(),_);@blockworld(east(),_);$ \\
+      \tab \tab $@blockworld(east(),_);@blockworld(south(),_);X \}$ \\~\\
+      
+      A \textbf{failing plan} starting with $@blockworld(east(),\_);@blockworld(east(),\_);$ generates this repair plan (X is whatever other action)
+    \end{block}
+  \end{frame}
+  
+  % -----------------------------------------------
+  
+  \begin{frame}
+    \frametitle{External environments}
+    \begin{itemize}
+      \item We would like to interact and get feedback from the environment
+      \item Agents can interact with external environments (or vice-versa) via:
+      \begin{itemize}
+        \item External actions
+        \item External events
+        \item Exceptions
+      \end{itemize}
+    \end{itemize}
+  \end{frame}
