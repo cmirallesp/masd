@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project marketplace">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}/.."/>
+    <property name="dir.jarfile" value="${dir.buildfile}/dist"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/Environment2APL.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="Env"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${dir.buildfile}/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/lib/2apl.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/lib/jiprolog/JIProlog.jar"/>
+        </jar>
+    </target>
+</project>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xml:base="http://marketplace.eclipse.org/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eclipse Plugins, Bundles and Products - Eclipse Marketplace</title>
+    <link>http://marketplace.eclipse.org/</link>
+    <description></description>
+    <language>en</language>
+     <atom:link href="http://marketplace.eclipse.org/rss.xml" rel="self" type="application/rss+xml" />
+      <item>
+    <title>ImageJ Plugin</title>
+    <link>http://marketplace.eclipse.org/content/imagej-plugin</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/default_images/default_2.png&quot; width=&quot;110&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Wed, 2016-10-05 06:59&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Sat, 2017-05-13 04:46&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Bio7%22&quot;&gt;Bio7&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/mmisingnameaoh/listings&quot; title=&quot;Marcel Austenfeld&quot;&gt;Marcel Austenfeld&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;This plugin integrates the scientific image application ImageJ in an Eclipse view and is also part of the Bio7 application (&lt;a href=&quot;http://bio7.org&quot; rel=&quot;nofollow&quot;&gt;http://bio7.org&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;ImageJ is an open source image processing program designed for the analysis of scientific multidimensional images. Supported ImageJ images can be opened and analyzed in multiple view tabs.&lt;/p&gt;
+&lt;p&gt;ImageJ Plugins and macros are supported, too and can be installed in the plugins subfolder or the install location defined in the preferences. In addition the plugin comes bundled with a simple image thumbnail browser.&lt;/p&gt;
+&lt;p&gt;For more information visit:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/Bio7/EclipseImageJ1Plugin&quot; rel=&quot;nofollow&quot;&gt;https://github.com/Bio7/EclipseImageJ1Plugin&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://bio7.org&quot; rel=&quot;nofollow&quot;&gt;http://bio7.org&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ImageJ documentation and websites:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://imagej.nih.gov/ij/&quot; rel=&quot;nofollow&quot;&gt;https://imagej.nih.gov/ij/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://imagej.net/Welcome&quot; rel=&quot;nofollow&quot;&gt;http://imagej.net/Welcome&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://imagej.nih.gov/ij/docs/guide/146.html&quot; rel=&quot;nofollow&quot;&gt;https://imagej.nih.gov/ij/docs/guide/146.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;New in 1.51n:&lt;/p&gt;
+&lt;p&gt;* Added a fake editor to register and open standard image files from the Navigator or Project Explorer, etc in the ImageJ view.&lt;/p&gt;
+&lt;p&gt;* Fixed several image conversion bugs&lt;/p&gt;
+&lt;p&gt;* Moved plugin update site to github (if you have an old installation please uninstall the old plugins first before you install from this location!)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Wed, 05 Oct 2016 10:59:26 +0000</pubDate>
+ <dc:creator>mmisingnameaoh</dc:creator>
+ <guid isPermaLink="false">3103502 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/imagej-plugin#comments</comments>
+  </item>
+  <item>
+    <title>Eclipse Kura Heater Demo</title>
+    <link>http://marketplace.eclipse.org/content/eclipse-kura-heater-demo</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/default_images/default_2.png&quot; width=&quot;110&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Thu, 2016-05-19 07:20&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Fri, 2017-05-12 11:54&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Eurotech%22&quot;&gt;Eurotech&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/dwoodard/listings&quot; title=&quot;David Woodard&quot;&gt;David Woodard&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;This is an example application for the Eclipse Kura framework. It simulates a heater devices and exposes properties that can be configured through the Eclipse Kura framework.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Thu, 19 May 2016 11:20:30 +0000</pubDate>
+ <dc:creator>dwoodard</dc:creator>
+ <guid isPermaLink="false">2893454 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/eclipse-kura-heater-demo#comments</comments>
+  </item>
+  <item>
+    <title>KaiZen OpenAPI Editor</title>
+    <link>http://marketplace.eclipse.org/content/kaizen-openapi-editor</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/KaiZen%20Symbol%20%28v2%29.png&quot; width=&quot;80&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Sat, 2017-05-06 00:51&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Fri, 2017-05-12 05:07&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22RepreZen%22&quot;&gt;RepreZen&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/tepsteinccr/listings&quot; title=&quot;Theodore Epstein&quot;&gt;Theodore Epstein&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/RepreZen/KaiZen-OpenAPI-Editor&quot; rel=&quot;nofollow&quot;&gt;KaiZen OpenAPI Editor&lt;/a&gt; is RepreZen&#039;s open source, Eclipse-based editor for the industry-standard &lt;a href=&quot;http://openapis.org/&quot; rel=&quot;nofollow&quot;&gt;OpenAPI Specification&lt;/a&gt; language, based on Swagger.  This is the same full-featured editor, formerly known as SwagEdit, and featured in the popular &lt;a href=&quot;https://marketplace.eclipse.org/content/reprezen-api-studio&quot; rel=&quot;nofollow&quot;&gt;RepreZen API Studio&lt;/a&gt; solution. &lt;/p&gt;
+&lt;h2&gt;
+	Swagger-OpenAPI Zen In Your Eclipse IDE&lt;/h2&gt;
+&lt;p&gt;Features Include:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+		&lt;strong&gt;Full OpenAPI 2.0 compatibility&lt;/strong&gt;, with OpenAPI version 3.0 coming soon!&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Syntax highlighting&lt;/strong&gt; with configurable colors&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Content assist&lt;/strong&gt; with custom templates. Scope cycling makes it easy to insert references to definitions in the current file, project or workspace.&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Real-time validation&lt;/strong&gt;&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Multi-file support&lt;/strong&gt; with scope-cycling code assist on $ref properties&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Outline view&lt;/strong&gt;&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Quick Outline navigation&lt;/strong&gt; with scope cycling, to navigate anywhere within the current file, project or workspace.&lt;br /&gt;
+		 &lt;/li&gt;
+&lt;li&gt;
+		&lt;strong&gt;Hyperlink navigation&lt;/strong&gt; through $ref properties&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Requires Eclipse Mars.2 release or later.&lt;/p&gt;
+&lt;h2&gt;
+	Resources&lt;/h2&gt;
+&lt;h4&gt;
+	KaiZen OpenAPI Editor on GitHub&lt;/h4&gt;
+&lt;ul&gt;&lt;li&gt;
+		&lt;a href=&quot;https://github.com/RepreZen/KaiZen-OpenAPI-Editor&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Project Page on GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+		&lt;a href=&quot;https://github.com/RepreZen/KaiZen-OpenAPI-Editor/blob/master/GETTING_STARTED.md&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Getting Started Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+		&lt;a href=&quot;https://github.com/RepreZen/KaiZen-OpenAPI-Editor/blob/master/TROUBLESHOOTING.md&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Troubleshooting Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+		&lt;a href=&quot;https://github.com/RepreZen/KaiZen-OpenAPI-Editor/blob/master/DEVELOPERS_GUIDE.md&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Developer&#039;s Guide&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;h4&gt;
+	OpenAPI Specifications&lt;/h4&gt;
+&lt;ul&gt;&lt;li&gt;
+		&lt;a href=&quot;https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;Swagger-OpenAPI 2.0 Specification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+		&lt;a href=&quot;https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/versions/3.0.md&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;OpenAPI 3.0 Specification (DRAFT)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt; &lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Sat, 06 May 2017 04:51:50 +0000</pubDate>
+ <dc:creator>tepsteinccr</dc:creator>
+ <guid isPermaLink="false">3429028 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/kaizen-openapi-editor#comments</comments>
+  </item>
+  <item>
+    <title>Eclipse Class Decompiler</title>
+    <link>http://marketplace.eclipse.org/content/eclipse-class-decompiler</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/components.png&quot; width=&quot;80&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Mon, 2012-10-15 06:11&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Fri, 2017-05-12 04:22&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Chen%20Chao%28cnfree2000%40hotmail.com%29%22&quot;&gt;Chen Chao(cnfree2000@hotmail.com)&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/cchao/listings&quot; title=&quot;Chen Chao&quot;&gt;Chen Chao&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;Eclipse Class Decompiler integrates JD, Jad, FernFlower, CFR, Procyon seamlessly with Eclipse and allows Java developers to debug class files without source code directly. It also integrates Javadoc and supports the syntax of JDK8 lambda expressions.&lt;/p&gt;
+&lt;p&gt;Github Project Page: &lt;a href=&quot;http://www.cpupk.com/decompiler&quot; rel=&quot;nofollow&quot;&gt;http://www.cpupk.com/decompiler&lt;/a&gt;&lt;br /&gt;
+	Plugin Update Site: &lt;a href=&quot;http://www.cpupk.com/decompiler/update&quot; rel=&quot;nofollow&quot;&gt;http://www.cpupk.com/decompiler/update&lt;/a&gt;&lt;br /&gt;
+	Tutorial: &lt;a href=&quot;https://www.eclipse.org/community/eclipse_newsletter/2017/february/article8.php&quot; rel=&quot;nofollow&quot;&gt;The Features of Eclipse Class Decompiler&lt;/a&gt;&lt;/p&gt;
+
+
+
+			&lt;a class=&quot;colorbox init-colorbox-processed cboxElement&quot; href=&quot;https://marketplace.eclipse.org/sites/default/files/debug_0.png&quot; rel=&quot;nofollow&quot; title=&quot;Eclipse Class Decompiler&quot;&gt;&lt;/a&gt;
+
+			&lt;a class=&quot;colorbox init-colorbox-processed cboxElement&quot; href=&quot;https://marketplace.eclipse.org/sites/default/files/decompiler_0.png&quot; rel=&quot;nofollow&quot; title=&quot;Eclipse Class Decompiler&quot;&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Mon, 15 Oct 2012 10:11:20 +0000</pubDate>
+ <dc:creator>cchao</dc:creator>
+ <guid isPermaLink="false">472922 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/eclipse-class-decompiler#comments</comments>
+  </item>
+  <item>
+    <title>Azure Toolkit for Eclipse</title>
+    <link>http://marketplace.eclipse.org/content/azure-toolkit-eclipse</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/azure110x80.png&quot; width=&quot;110&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Tue, 2014-09-16 16:39&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Thu, 2017-05-11 22:41&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Microsoft%20Corp.%22&quot;&gt;Microsoft Corp.&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/msawicki/listings&quot; title=&quot;Martin Sawicki&quot;&gt;Martin Sawicki&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;The Azure Toolkit for Eclipse provides functionality that allow you to easily create, develop, configure, test, and deploy lightweight, highly available and scalable Java web apps to Microsoft Azure using the Eclipse development environment running on Mac OS, Linux and Windows. It also contains all the key Azure service API clients for Java, exposed as Eclipse libraries, including the Azure Management SDK, Storage SDK, Application Insights SDK and JDBC (for SQL Server and Azure SQL Database). Other key features of the Azure Toolkit for Eclipse include: &lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+		quick deployment of a Java application to an Azure Web App container&lt;/li&gt;
+&lt;li&gt;
+		quick dev/test deployments of Java applications to Docker containers running within Azure Docker Host VMs, for which the plugin also provides basic management support&lt;/li&gt;
+&lt;li&gt;
+		create Spark applications for Azure HDInsight Spark Linux cluster using Java or Scala&lt;/li&gt;
+&lt;li&gt;
+		use any JVM with your cloud app, including the OpenJDK (e.g. Azul Zulu) or the Oracle JDK&lt;/li&gt;
+&lt;li&gt;
+		deploy any application server, including Tomcat, Jetty, JBoss or GlassFish; or rely on a version of Tomcat or Jetty made available in Azure by Microsoft&lt;/li&gt;
+&lt;li&gt;
+		use the Azure Explorer view to navigate and manage your Azure storage accounts (blobs, tables, queue), web apps, HDInsight (Spark) resources, Docker hosts and published Docker containers on Azure&lt;/li&gt;
+&lt;li&gt;
+		program against Azure&#039;s services such as Storage, Azure SQL Database and more, using the Azure SDK APIs for Java&lt;/li&gt;
+&lt;li&gt;
+		enable automated telemetry for your applications using Application Insights logging directly into the Azure cloud, regardless of where your application is running&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Learn more at the &lt;a href=&quot;http://go.microsoft.com/fwlink/?LinkID=699529&quot; rel=&quot;nofollow&quot;&gt;documentation site&lt;/a&gt;, and learn more about Java on Azure in general at the &lt;a href=&quot;https://azure.microsoft.com/develop/java/&quot; rel=&quot;nofollow&quot;&gt;Azure Developer Center for Java&lt;/a&gt;. &lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Tue, 16 Sep 2014 20:39:08 +0000</pubDate>
+ <dc:creator>msawicki</dc:creator>
+ <guid isPermaLink="false">1919278 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/azure-toolkit-eclipse#comments</comments>
+  </item>
+  <item>
+    <title>SWAMP Eclipse Plug-in</title>
+    <link>http://marketplace.eclipse.org/content/swamp-eclipse-plug</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/SWAMP-Logo-Final-Small.png&quot; width=&quot;110&quot; height=&quot;35&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Mon, 2017-05-01 21:03&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Thu, 2017-05-11 16:59&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Software%20Assurance%20Marketplace%22&quot;&gt;Software Assurance Marketplace&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/vbasupalli/listings&quot; title=&quot;Vamshi Basupalli&quot;&gt;Vamshi Basupalli&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;The SWAMP Eclipse Plug-in allows users to easily run static analysis tools available on the Software Assurance Marketplace (&lt;a href=&quot;https://www.continuousassurance.org/&quot; rel=&quot;nofollow&quot;&gt;https://www.continuousassurance.org/&lt;/a&gt;) on their Java, C or C++ Eclipse project. The plug-in automatically packages the project&#039;s source code, uploads it to the SWAMP, starts the assessment(s), downloads the reported weaknesses, and displays them within Eclipse. Current SWAMP tools include Clang Static Analyzer, Cppcheck, GCC Warnings, GrammaTech’s CodeSonar, Parasoft’s C/C++test, FindBugs with FindSecurityBugs and fb-contrib plug-ins, checkstyle, Error Prone, PMD, and Parasoft’s Jtest.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Tue, 02 May 2017 01:03:15 +0000</pubDate>
+ <dc:creator>vbasupalli</dc:creator>
+ <guid isPermaLink="false">3421563 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/swamp-eclipse-plug#comments</comments>
+  </item>
+  <item>
+    <title>Subversive - SVN Team Provider</title>
+    <link>http://marketplace.eclipse.org/content/subversive-svn-team-provider</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/Subversive-logo-110-transparent.png&quot; width=&quot;110&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Tue, 2010-02-09 12:00&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Thu, 2017-05-11 08:05&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Eclipse.org%22&quot;&gt;Eclipse.org&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/ivinnykov/listings&quot; title=&quot;Igor Vinnykov&quot;&gt;Igor Vinnykov&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;The Subversive project is aimed to integrate the Subversion (SVN) version control system with the Eclipse platform. Using the Subversive plug-in, you can work with projects stored in Subversion repositories directly from the Eclipse workbench in a way similar to work with other Eclipse version control providers, such as CVS and Git.&lt;/p&gt;
+&lt;p&gt;Subversive Features&lt;/p&gt;
+&lt;p&gt;Subversive plug-in provides access to Subversion repositories from the Eclipse workbench.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+&lt;p&gt;Full-Scale SVN Client - Subversive is designed to be used as a full-featured SVN client, so you can update, commit, merge changes, work with SVN properties, view change history and perform other operations with SVN directly from the Eclipse environment.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Advanced SVN Features - Subversive includes several features that extend functionality of the standard SVN client. In particular, Subversive can show the SVN repository content grouped by the logical structures of trunk, branch and tag and display changes on a visual revisions graph.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Seamless Integration with Eclipse - Subversive is an official Eclipse project and an integral part of Eclipse Simultaneous releases. The project follows all Eclipse guidelines and requirements to deliver a quality SVN team provider plug-in similar to CVS and Git implementations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Support of the Latest SVN Versions - Subversive evolves together with the Subversion project to provide Eclipse users with the features that appeared in new versions of the SVN implementation. You can use the new SVN functionality in Eclipse by installing the Early Access version of Subversive.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Compatibility&lt;/p&gt;
+&lt;p&gt;Subversive is compatible with JDK 1.6, Eclipse 4.4 and later versions of JDK and Eclipse. It supports SVN versions 1.8-1.9 and migration from SVN 1.1-1.7.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Tue, 09 Feb 2010 17:00:12 +0000</pubDate>
+ <dc:creator>ivinnykov</dc:creator>
+ <guid isPermaLink="false">1139 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/subversive-svn-team-provider#comments</comments>
+  </item>
+  <item>
+    <title>Find/replace with regular expressions and match evaluators</title>
+    <link>http://marketplace.eclipse.org/content/findreplace-regular-expressions-and-match-evaluators</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/default_images/default_2.png&quot; width=&quot;110&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Sun, 2016-08-21 16:24&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Thu, 2017-05-11 07:16&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22Florian%20Ingerl%22&quot;&gt;Florian Ingerl&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/fingerl/listings&quot; title=&quot;Florian Ingerl&quot;&gt;Florian Ingerl&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;This is an eclipse plugin, that extends the functionality of the find/replace dialog in eclipse. If this plugin is installed, you can open a find/replace dialog if you press the key combination Ctrl + F5 (or Cmd + F5 on mac computers) while a text editor is active. Then you can search for a regular expression in the text editor and write a function in Java that takes a MatchResult object as a parameter and returns a String. This function is used by the plugin to replace matches. The plugin can be installed via the update site &lt;a href=&quot;https://github.com/florianingerl/com.florian.regexfindandreplace/raw/master/com.florian.regexfindandreplace.feature/export1.0.1&quot; rel=&quot;nofollow&quot;&gt;https://github.com/florianingerl/com.florian.regexfindandreplace/raw/mas...&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Sun, 21 Aug 2016 20:24:07 +0000</pubDate>
+ <dc:creator>fingerl</dc:creator>
+ <guid isPermaLink="false">3035189 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/findreplace-regular-expressions-and-match-evaluators#comments</comments>
+  </item>
+  <item>
+    <title>JAS-mine Plugin for Eclipse IDE</title>
+    <link>http://marketplace.eclipse.org/content/jas-mine-plugin-eclipse-ide</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/JAS-mineLOGO.png&quot; width=&quot;97&quot; height=&quot;80&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Sat, 2016-01-16 09:09&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Wed, 2017-05-10 17:32&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;a href=&quot;/search/content/%22JAS-mine%22&quot;&gt;JAS-mine&lt;/a&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/jsimulation/listings&quot; title=&quot;JASmine Simulation&quot;&gt;JASmine Simulation&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;&lt;strong&gt;JAS-mine simulation project plugin for Eclipse IDE. &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;This plugin allows the easy creation of a new JAS-mine simulation project within the Eclipse IDE. New projects containing a simple structure that can be used as a template to build microsimulation and agent-based modelling projects that utilise the JAS-mine core and gui libraries. New projects contain a .pom files, therefore use of Maven is recommended to easily add project dependencies (in particular, this has been tested using the &#039;Maven Integration for Eclipse WTP&#039; plugin). &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;JAS-mine is a Java platform that aims at providing a unique simulation tool for discrete-event simulations, including agent-based and microsimulation models. With the aim to develop large-scale, data-driven models, the main architectural choice of JAS-mine is to use whenever possible standard, open-source tools already available in the software development community.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;The main value added of the platform are:&lt;/p&gt;
+&lt;ol&gt;&lt;li&gt;
+		integration of I/O communication tools, in the form of embedded RDBMS (relational database management systems) tools and automatic CSV table creation,&lt;/li&gt;
+&lt;li&gt;
+		advanced multi-run tools to facilitate design of experiments (DOE),&lt;/li&gt;
+&lt;li&gt;
+		sophisticated regression libraries that allow a complete separation of regression specifications from the code, and permit uncertainty analysis of the model outcome by bootstrapping the estimated coefficients across different simulation runs.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;JAS-mine allows to separate data representation and management, which is automatically taken care of by the simulation engine, from the implementation of processes and behavioral algorithms, which should be the primary concern of the modeler. This results in quicker, more robust and more transparent model building.&lt;/p&gt;
+&lt;p&gt;Features:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+		A discrete-event simulation engine, allowing for both discrete-time and continuous-time simulation modeling;&lt;/li&gt;
+&lt;li&gt;
+		A Model-Collector-Observer structure;&lt;/li&gt;
+&lt;li&gt;
+		Interactive (GUI based) batch and multi-run execution modes, the latter allowing for detailed design of experiments (DOE);&lt;/li&gt;
+&lt;li&gt;
+		A library implementing a number of different matching methods, to match different lists of agents;&lt;/li&gt;
+&lt;li&gt;
+		A library implementing a number of different alignment methods, to force the microsimulation outcomes meeting some exogenous aggregate targets;&lt;/li&gt;
+&lt;li&gt;
+		A Regression library implementing a number of common econometric models, from continuous response linear regression models to binomial and multinomial logit and probit models, which includes automatic bootstrapping of the coefficients for uncertainty analysis of the model oucomes;&lt;/li&gt;
+&lt;li&gt;
+		A statistical package based on the cern.jet libraries;&lt;/li&gt;
+&lt;li&gt;
+		Embedded H2 database;&lt;/li&gt;
+&lt;li&gt;
+		Export to .CSV files as a faster alternative to database persistence;&lt;/li&gt;
+&lt;li&gt;
+		MS Excel I/O communication tools;&lt;/li&gt;
+&lt;li&gt;
+		Automatic GUI creation for parameters by using Java annotation;&lt;/li&gt;
+&lt;li&gt;
+		Automatic output database creation;&lt;/li&gt;
+&lt;li&gt;
+		Automatic agents’ sampling and recording;&lt;/li&gt;
+&lt;li&gt;
+		Powerful probes for real-time statistical analysis and data collection;&lt;/li&gt;
+&lt;li&gt;
+		A rich graphical library for real-time plotting of simulation outcomes;&lt;/li&gt;
+&lt;li&gt;
+		Eclipse plugin, which allows to create a JAS-mine project in just a few clicks, with template classes organised in the JAS-mine standard package and folder structure;&lt;/li&gt;
+&lt;li&gt;
+		Maven version control.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;For further details on JAS-mine, see &lt;a href=&quot;http://www.jas-mine.net&quot; rel=&quot;nofollow&quot;&gt;www.jas-mine.net&lt;/a&gt;. Copyright 2017 Ross E. Richardson&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Sat, 16 Jan 2016 14:09:12 +0000</pubDate>
+ <dc:creator>jsimulation</dc:creator>
+ <guid isPermaLink="false">2684519 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/jas-mine-plugin-eclipse-ide#comments</comments>
+  </item>
+  <item>
+    <title>emfjson</title>
+    <link>http://marketplace.eclipse.org/content/emfjson</link>
+    <description>&lt;div class=&quot;field field-name-field-resource-image field-type-image field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;img class=&quot;img-responsive&quot; src=&quot;http://marketplace.eclipse.org/sites/default/files/default_images/default_2.png&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-created field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Created:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Fri, 2012-01-20 09:50&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-date-updated field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Date Updated:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;Wed, 2017-05-10 16:34&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;field field-name-shared-submitted-by field-type-text field-label-inline clearfix&quot;&gt;&lt;div class=&quot;field-label&quot;&gt;Submitted by:&amp;nbsp;&lt;/div&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;a href=&quot;/user/ghillairet/listings&quot; title=&quot;Guillaume Hillairet&quot;&gt;Guillaume Hillairet&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_start --&gt;&lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;&lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot;&gt;&lt;p&gt;EMF Binding for JSON. JSON binding for EMF (Eclipse Modeling Framework) models, that allows serialization and deserialization of EMF Resources in a specific JSON format. This software is distributed under the terms of the Eclipse Public License 1.0 - EPL.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;!-- google_ad_section_end --&gt;</description>
+     <pubDate>Fri, 20 Jan 2012 14:50:35 +0000</pubDate>
+ <dc:creator>ghillairet</dc:creator>
+ <guid isPermaLink="false">188636 at http://marketplace.eclipse.org</guid>
+ <comments>http://marketplace.eclipse.org/content/emfjson#comments</comments>
+  </item>
+  </channel>
+</rss>

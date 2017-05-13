@@ -1,0 +1,14 @@
+goals:
+  getSquare(100).
+
+pgrules:
+  getSquare(X) <- true | {
+    @env(square(X),Y);
+    print(Y);
+    dropgoal(getSquare(X));
+  }
+  
+pcrules:
+  event(name(Name), env) <- true | {
+    +name(Name);
+  }
