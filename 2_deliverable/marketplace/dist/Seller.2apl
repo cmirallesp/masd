@@ -1,0 +1,25 @@
+beliefs:
+  qty([_,X],X).
+
+goals:
+  putOnSale(1,prod1,5).
+  putOnSale(1,prod1,10).
+
+beliefupdates:
+  { onSale(Id,Qty) }    UpOnSale(Id,Qty2) { not onSale(Id,Qty), onSale(Id,Qty2) }
+  { not onSale(Id,_) }  UpOnSale(Id,Qty)  { onSale(Id,Qty) }
+
+pgrules:
+  putOnSale(Id,Desc,Qty) <- true | 
+  {
+    @env( putOnSale(Id,Desc,Qty), Y );
+    B([_, Qty2] = Y);
+    print(Qty2);
+    UpOnSale(Id,Qty2);
+    dropgoal(putOnSale(Id,Desc,Qty));
+  }
+  
+pcrules:
+  event(name(Name), env) <- true | {
+    +name(Name);
+  }

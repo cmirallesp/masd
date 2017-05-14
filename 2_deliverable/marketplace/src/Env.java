@@ -4,6 +4,9 @@ import apapl.data.APLFunction;
 import apapl.data.APLIdent;
 import apapl.data.APLNum;
 import apapl.data.Term;
+import java.util.Hashtable;
+import apapl.data.APLList;
+
 
 /**
  * === About this file
@@ -40,8 +43,19 @@ import apapl.data.Term;
  *
  */
 public class Env extends Environment {
+	private class Product{
+		int id;
+		String desc;
+		int qty;
+		
+		Product(int _id,String _desc,int _qty){
+			this.id = _id;
+			this.desc = _desc;
+			this.qty = _qty;
+		}
+	}
 	private final boolean log = true;
-	
+	private Hashtable products = new Hashtable(); 
     /**
      * We do not use this method, but we need it so that the JAR file that we will create can point
      * to this class as the main class. This is only possible if the class contains  main method.
@@ -82,24 +96,38 @@ public class Env extends Environment {
 	}
 	
 	/**
-	 * External actions of agents can be caught by defining methods that have a Term as return value.
-	 * This method can be called by a 2APL agents as follows: \@env(square(5), X).
-	 * X will now contain the return value, in this case 25.
+	 * This method can be called by a 2APL agents as follows: \@env(putOnsSale(id,"my product",2), X).
+	 * X will be id
 	 * @param agName The name of the agent that does the external action
-	 * @param num The num to calculate the square of, coded in an APLNum
+	 * @param idProd product identifier
+	 * @param desc product description
+	 * @param qty quantity
+	 * 
 	 * @return The square of the input, coded in an APLNum
 	 */
-	public Term square(String agName, APLNum aplNum) throws ExternalActionFailedException {
-		int num = aplNum.toInt();
+	public Term putOnSale(String agName, APLNum idProd, APLIdent desc, APLNum qty) throws ExternalActionFailedException {
+		log("env> agent " + agName + " putOnSale <" + idProd + "," + desc+ "," + qty + ">.");
 		
-		log("env> agent " + agName + " requests the square of " + num + ".");
-				
+		Product product = (Product) products.get(idProd.toInt());
+		if (product==null){
+			product = new Product(idProd.toInt(),desc.toString(),qty.toInt());
+			products.put(idProd.toInt(), product);
+			System.out.print("NOT found");
+		}
+		else{
+			System.out.print("found");
+			product.qty += qty.toInt();
+		}
+
 		try {
-			return new APLNum(num*num);
+			System.out.println("===>"+product.qty);
+			APLList lst = new APLList(idProd,new APLNum(product.qty));
+			System.out.println("---"+lst);
+			return lst;
 			
 		} catch (Exception e) {
 			//exception handling
-			System.err.println("env> external action square() of " + agName + " failed: " +e.getMessage());
+			System.err.println("env> external action putOnSale(..) of " + agName + " failed: " +e.getMessage());
 			return null;
 		}
 	}
