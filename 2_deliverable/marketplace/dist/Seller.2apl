@@ -4,22 +4,40 @@ beliefs:
 goals:
   putOnSale(1,prod1,5).
   putOnSale(1,prod1,10).
+  retireFromSale(1,3), retireFromSale(1,14).
 
 beliefupdates:
-  { onSale(Id,Qty) }    UpOnSale(Id,Qty2) { not onSale(Id,Qty), onSale(Id,Qty2) }
-  { not onSale(Id,_) }  UpOnSale(Id,Qty)  { onSale(Id,Qty) }
+  { Qty2 = 0, onSale(Id,Qty)  }    UpdateOnSale(Id,Qty2) { not onSale(Id,Qty) }
+  { Qty2 > 0, onSale(Id,Qty)   }  UpdateOnSale(Id,Qty2) { not onSale(Id,Qty), onSale(Id,Qty2) }
+  { Qty2 > 0, not onSale(Id,_) }  UpdateOnSale(Id,Qty2)  { onSale(Id,Qty2) }
+
 
 pgrules:
+
   putOnSale(Id,Desc,Qty) <- true | 
   {
     @env( putOnSale(Id,Desc,Qty), Y );
     B([_, Qty2] = Y);
-    print(Qty2);
-    UpOnSale(Id,Qty2);
+    UpdateOnSale(Id,Qty2);
     dropgoal(putOnSale(Id,Desc,Qty));
   }
   
+  retireFromSale(Id,Qty) <- onSale(Id,_) |
+  {
+    @env(retireFromSale(Id,Qty), Y );
+    B([_, Qty2] = Y);
+    UpdateOnSale(Id,Qty2);
+    dropgoal(retireFromSale(Id,Qty));
+  }
+
 pcrules:
   event(name(Name), env) <- true | {
     +name(Name);
   }
+
+prrules:
+  @env(retireFromSale(Id,Qty),Y); R; <- true | 
+  { 
+    UpdateOnSale(Id,0);
+    dropgoal(retireFromSale(Id,Qty)); 
+  }  

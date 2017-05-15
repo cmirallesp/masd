@@ -96,41 +96,72 @@ public class Env extends Environment {
 	}
 	
 	/**
-	 * This method can be called by a 2APL agents as follows: \@env(putOnsSale(id,"my product",2), X).
-	 * X will be id
+	 * This method can be called by a 2APL agents as follows: @env(putOnsSale(id,"my product",2), X).
+	 * X will be [id,qty]
 	 * @param agName The name of the agent that does the external action
 	 * @param idProd product identifier
 	 * @param desc product description
 	 * @param qty quantity
 	 * 
-	 * @return The square of the input, coded in an APLNum
+	 * @return The id and qty in a APLList
 	 */
 	public Term putOnSale(String agName, APLNum idProd, APLIdent desc, APLNum qty) throws ExternalActionFailedException {
-		log("env> agent " + agName + " putOnSale <" + idProd + "," + desc+ "," + qty + ">.");
+		log(String.format("env> agent %s putOnSale(%s,%s,%s)", agName, idProd, desc,qty));
+		
 		
 		Product product = (Product) products.get(idProd.toInt());
 		if (product==null){
 			product = new Product(idProd.toInt(),desc.toString(),qty.toInt());
 			products.put(idProd.toInt(), product);
-			System.out.print("NOT found");
 		}
 		else{
-			System.out.print("found");
 			product.qty += qty.toInt();
 		}
 
 		try {
-			System.out.println("===>"+product.qty);
-			APLList lst = new APLList(idProd,new APLNum(product.qty));
-			System.out.println("---"+lst);
-			return lst;
+			return new APLList(idProd,new APLNum(product.qty));
 			
 		} catch (Exception e) {
 			//exception handling
-			System.err.println("env> external action putOnSale(..) of " + agName + " failed: " +e.getMessage());
+			System.err.println(String.format(
+					"env> %s putOnSale(%s,..) failed: %s ", agName, idProd,e.getMessage()));
 			return null;
 		}
 	}
+	
+	/**
+	 * This method can be called by a 2APL agents as follows: @env(putOnsSale(id,"my product",2), X).
+	 * X will be [id,qty]
+	 * @param agName The name of the agent that does the external action
+	 * @param idProd product identifier
+	 * @param qty quantity to be retired
+	 * 
+	 * @return The id and qty in a APLList
+	 */
+	public Term retireFromSale(String agName, APLNum idProd,  APLNum qty) throws ExternalActionFailedException {
+		log(String.format("env> agent %s retireFromSale(%s,%s)", agName, idProd, qty));
+		
+		Product product = (Product) products.get(idProd.toInt());
+		if (product==null){
+			log("throwing exception");
+			throw new ExternalActionFailedException(
+					String.format("Product %s not in product list", idProd));
+		}
+		
+		product.qty = Math.max(0, product.qty-qty.toInt());
+		log("qty===>"+product.qty);
+		
+		try {
+			return new APLList(idProd,new APLNum(product.qty));
+			
+		} catch (Exception e) {
+			//exception handling
+			System.err.println(String.format(
+					"env> %s retireFromSale(%s,..) failed: %s ", agName, idProd,e.getMessage()));
+			return null;
+		}
+	}
+
 	
 	private void log(String str) {
 		if (log) System.out.println(str);
