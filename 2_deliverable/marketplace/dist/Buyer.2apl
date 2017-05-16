@@ -2,15 +2,45 @@ goals:
   searchProduct(prod1).
   searchProduct(prod2).
 
-pgrules:
+beliefupdates:
+  % update searchedTimes first time
+  {not searchedTimes(Desc,_)} 
+    UpdateSearchedTimes(Desc) 
+  {searchedTimes(Desc,1)}
 
+  % updated searchedTimes
+  {searchedTimes(Desc,N)} 
+    UpdateSearchedTimes(Desc) 
+  { not searchedTimes(Desc,N), searchedTimes(Desc,N+1) }
+  
+  % update productFounds first time
+  {not productFounds(Id,_,_), searchedTimes(Desc,N)} 
+    UpdateFounds(Id,Desc,Qty) 
+  {productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
+
+  % update productFounds 
+  {productFounds(Id,_,OldQty), searchedTimes(Desc,N)} 
+    UpdateFounds(Id,Desc,Qty) 
+  {not productFounds(Id,_,OldQty), productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
+  
+pgrules:
   searchProduct(Desc) <- true | 
   {
-    @env( searchProduct(Desc), Y );
-    B([Id,Desc, Qty] = Y);
-    print(Id);
-    dropgoal(searchProduct(Desc));
-  }
+    @env(searchProduct(Desc), Y );
+
+    if B([Id,Desc, Qty] = Y) then
+    {
+      UpdateFounds(Id,Desc,Qty);
+      dropgoal(searchProduct(Desc));
+    }
+    else{
+      UpdateSearchedTimes(Desc);
+      if B(searchedTimes(Desc,10)){
+        -searchedTimes(Desc,10);
+        dropgoal(searchProduct(Desc));
+      }
+    }
+  } 
 
 pcrules:
   event(name(Name), env) <- true | {

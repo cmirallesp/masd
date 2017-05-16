@@ -163,24 +163,28 @@ public class Env extends Environment {
 	}
 	//exact search for the moment (fuzzy?)
 	public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
-		log(String.format("env> agent %s searchProduct(%s,%s)", agName, prodDesc));
+		log(String.format("env> agent %s searchProduct(%s)", agName, prodDesc));
 		Product product = null;
 		boolean found = false;
 		for(Object o: products.values()){
 			product = ((Product) o);
-			if (product.desc.equals(prodDesc)){
+			log(String.format("DB:%s param:%s", product.desc, prodDesc));
+			if (product.desc.equals(prodDesc.toString())){
 				found = true;
+				log("found--");
 				break;
 			}
 		}
 		
 		if(found){
+			log("found");
 			return new APLList(
 					new APLNum(product.id),
 					new APLIdent(product.desc),
 					new APLNum(product.qty));
 		}
 		else{
+			log("not found");
 			return new APLList();
 		}
 	}
