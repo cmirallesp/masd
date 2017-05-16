@@ -7,7 +7,6 @@ import apapl.data.Term;
 import java.util.Hashtable;
 import apapl.data.APLList;
 
-
 /**
  * === About this file
  * This is an example of a very simple environment that communicates with a single 2APl agent.
@@ -96,14 +95,14 @@ public class Env extends Environment {
 	}
 	
 	/**
-	 * This method can be called by a 2APL agents as follows: @env(putOnsSale(id,"my product",2), X).
+	 * This method can be called by a 2APL agents as follows: @env(putOnSale(id,"my product",2), X).
 	 * X will be [id,qty]
 	 * @param agName The name of the agent that does the external action
 	 * @param idProd product identifier
 	 * @param desc product description
 	 * @param qty quantity
 	 * 
-	 * @return The id and qty in a APLList
+	 * @return The idProd and qty in a APLList
 	 */
 	public Term putOnSale(String agName, APLNum idProd, APLIdent desc, APLNum qty) throws ExternalActionFailedException {
 		log(String.format("env> agent %s putOnSale(%s,%s,%s)", agName, idProd, desc,qty));
@@ -130,7 +129,7 @@ public class Env extends Environment {
 	}
 	
 	/**
-	 * This method can be called by a 2APL agents as follows: @env(putOnsSale(id,"my product",2), X).
+	 * This method can be called by a 2APL agents as follows: @env(retireFromSale(id,"my product",2), X).
 	 * X will be [id,qty]
 	 * @param agName The name of the agent that does the external action
 	 * @param idProd product identifier
@@ -141,6 +140,7 @@ public class Env extends Environment {
 	public Term retireFromSale(String agName, APLNum idProd,  APLNum qty) throws ExternalActionFailedException {
 		log(String.format("env> agent %s retireFromSale(%s,%s)", agName, idProd, qty));
 		
+
 		Product product = (Product) products.get(idProd.toInt());
 		if (product==null){
 			log("throwing exception");
@@ -161,7 +161,29 @@ public class Env extends Environment {
 			return null;
 		}
 	}
-
+	//exact search for the moment (fuzzy?)
+	public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
+		log(String.format("env> agent %s searchProduct(%s,%s)", agName, prodDesc));
+		Product product = null;
+		boolean found = false;
+		for(Object o: products.values()){
+			product = ((Product) o);
+			if (product.desc.equals(prodDesc)){
+				found = true;
+				break;
+			}
+		}
+		
+		if(found){
+			return new APLList(
+					new APLNum(product.id),
+					new APLIdent(product.desc),
+					new APLNum(product.qty));
+		}
+		else{
+			return new APLList();
+		}
+	}
 	
 	private void log(String str) {
 		if (log) System.out.println(str);

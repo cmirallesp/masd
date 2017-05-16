@@ -1,4 +1,5 @@
 <apaplmas>
   <environment name="env" file="Environment2APL.jar"/>
   <agent name="agent1" file="seller.2apl"/>
+  <agent name="agent2" file="buyer.2apl"/>
 </apaplmas>

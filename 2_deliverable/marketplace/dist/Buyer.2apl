@@ -1,0 +1,19 @@
+goals:
+  searchProduct(prod1).
+  searchProduct(prod2).
+
+pgrules:
+
+  searchProduct(Desc) <- true | 
+  {
+    @env( searchProduct(Desc), Y );
+    B([Id,Desc, Qty] = Y);
+    print(Id);
+    dropgoal(searchProduct(Desc));
+  }
+
+pcrules:
+  event(name(Name), env) <- true | {
+    +name(Name);
+  }
+
