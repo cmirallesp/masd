@@ -119,8 +119,8 @@ public class Env extends Environment {
 
 		try {
 			return new APLList(idProd,new APLNum(product.qty));
-			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			//exception handling
 			System.err.println(String.format(
 					"env> %s putOnSale(%s,..) failed: %s ", agName, idProd,e.getMessage()));
@@ -139,7 +139,6 @@ public class Env extends Environment {
 	 */
 	public Term retireFromSale(String agName, APLNum idProd,  APLNum qty) throws ExternalActionFailedException {
 		log(String.format("env> agent %s retireFromSale(%s,%s)", agName, idProd, qty));
-		
 
 		Product product = (Product) products.get(idProd.toInt());
 		if (product==null){
@@ -148,19 +147,19 @@ public class Env extends Environment {
 					String.format("Product %s not in product list", idProd));
 		}
 		
-		product.qty = Math.max(0, product.qty-qty.toInt());
-		log("qty===>"+product.qty);
+		product.qty = Math.max(0, product.qty - qty.toInt());
 		
 		try {
 			return new APLList(idProd,new APLNum(product.qty));
-			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			//exception handling
 			System.err.println(String.format(
 					"env> %s retireFromSale(%s,..) failed: %s ", agName, idProd,e.getMessage()));
 			return null;
 		}
 	}
+	
 	//exact search for the moment (fuzzy?)
 	public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
 		log(String.format("env> agent %s searchProduct(%s)", agName, prodDesc));
@@ -171,20 +170,17 @@ public class Env extends Environment {
 			log(String.format("DB:%s param:%s", product.desc, prodDesc));
 			if (product.desc.equals(prodDesc.toString())){
 				found = true;
-				log("found--");
 				break;
 			}
 		}
 		
 		if(found){
-			log("found");
 			return new APLList(
 					new APLNum(product.id),
 					new APLIdent(product.desc),
 					new APLNum(product.qty));
 		}
 		else{
-			log("not found");
 			return new APLList();
 		}
 	}

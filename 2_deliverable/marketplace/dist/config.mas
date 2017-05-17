@@ -1,5 +1,6 @@
 <apaplmas>
   <environment name="env" file="Environment2APL.jar"/>
-  <agent name="agent1" file="seller.2apl"/>
-  <agent name="agent2" file="buyer.2apl"/>
+  <agent name="seller1" file="Seller.2apl"/>
+  <agent name="buyer1" file="Buyer.2apl"/>
+  <agent name="reviewer" file="ReputationManager.2apl"/>
 </apaplmas>

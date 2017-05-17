@@ -1,0 +1,18 @@
+beliefupdates:
+  {not review(Product,_)} 
+    UpdateReview(Product, Score) 
+  { review(Product,[Score])}
+  
+  {review(Product,Scores)} 
+    UpdateReview(Product, Score) 
+  { not review(Product,Scores), review(Product,[Score|Scores])}
+
+pcrules:
+  message(Buyer, inform, _, _, addReview(Product, Score)) <- true |
+  { 
+    UpdateReview(Product,Score);
+  }
+  
+  event(name(Name), env) <- true | {
+    +name(Name);
+  }

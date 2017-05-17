@@ -1,6 +1,9 @@
 goals:
   searchProduct(prod1).
   searchProduct(prod2).
+  sendReview(prod1, 10). 
+  sendReview(prod1, 12). 
+  sendReview(prod2, 12). 
 
 beliefupdates:
   % update searchedTimes first time
@@ -40,7 +43,13 @@ pgrules:
         dropgoal(searchProduct(Desc));
       }
     }
-  } 
+  }
+
+  sendReview(Prod,Score) <- true |
+  { 
+    send(reviewer, inform, addReview(Prod, Score));
+    dropgoal(sendReview(Prod, Score));
+  }
 
 pcrules:
   event(name(Name), env) <- true | {
