@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project PDTVersion="0.3.2">
+<RelationPool IMemento.internal.id="5642" PoolType="5">
+<Relation DST="4865" IMemento.internal.id="5381" Prominence="0" RelationType="1073741830" SRC="4353"/>
+</RelationPool>
+<ConnectionPool IMemento.internal.id="7434" PoolType="4">
+<Connection ConnectionType="536870914" DST="9730" IMemento.internal.id="10756" MotherDiagram="515" SRC="10498"/>
+<Connection ConnectionType="536870914" DST="12034" IMemento.internal.id="12548" MotherDiagram="515" SRC="6914"/>
+<Connection ConnectionType="536870914" DST="8450" IMemento.internal.id="8708" MotherDiagram="515" SRC="5890"/>
+<Connection ConnectionType="536870914" DST="12034" IMemento.internal.id="12292" MotherDiagram="515" SRC="8450"/>
+<Connection ConnectionType="536870914" DST="5890" IMemento.internal.id="9988" MotherDiagram="515" SRC="9730"/>
+<Connection ConnectionType="536870914" DST="6914" IMemento.internal.id="7172" MotherDiagram="515" SRC="5890"/>
+</ConnectionPool>
+<DiagramPool IMemento.internal.id="778" PoolType="3">
+<Diagram DiagramType="86" IMemento.internal.id="1539"/>
+<Diagram DiagramType="88" IMemento.internal.id="515"/>
+<Diagram DiagramType="84" IMemento.internal.id="2307"/>
+<Diagram DiagramType="90" IMemento.internal.id="1283"/>
+<Diagram DiagramType="85" IMemento.internal.id="2051"/>
+<Diagram DiagramType="89" IMemento.internal.id="1027"/>
+<Diagram DiagramType="87" IMemento.internal.id="1795"/>
+</DiagramPool>
+<CellPool IMemento.internal.id="3594" PoolType="2">
+<EntityCell IMemento.internal.id="9474" MotherDiagram="1283" WrappedEntity="8961">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="220"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="9218" MotherDiagram="1795" WrappedEntity="8961">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="190"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="5122" MotherDiagram="1027" WrappedEntity="4865">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="130"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="6914" MotherDiagram="515" WrappedEntity="6145">
+<Look Height="-1" Width="-1" XCoordinate="182" YCoordinate="223"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="6658" MotherDiagram="1283" WrappedEntity="6145">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="160"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="10498" MotherDiagram="515" WrappedEntity="10241">
+<Look Height="-1" Width="-1" XCoordinate="476" YCoordinate="23"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="4610" MotherDiagram="1539" WrappedEntity="4353">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="130"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="8450" MotherDiagram="515" WrappedEntity="7681">
+<Look Height="-1" Width="-1" XCoordinate="319" YCoordinate="213"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="6402" MotherDiagram="1795" WrappedEntity="6145">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="130"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="8194" MotherDiagram="1283" WrappedEntity="7681">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="190"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="12034" MotherDiagram="515" WrappedEntity="11777">
+<Look Height="-1" Width="-1" XCoordinate="264" YCoordinate="307"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="7938" MotherDiagram="1795" WrappedEntity="7681">
+<Look Height="-1" Width="-1" XCoordinate="100" YCoordinate="160"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="5890" MotherDiagram="515" WrappedEntity="4353">
+<Look Height="-1" Width="-1" XCoordinate="203" YCoordinate="136"/>
+</EntityCell>
+<EntityCell IMemento.internal.id="9730" MotherDiagram="515" WrappedEntity="8961">
+<Look Height="-1" Width="-1" XCoordinate="243" YCoordinate="31"/>
+</EntityCell>
+</CellPool>
+<EntityPool IMemento.internal.id="2826" PoolType="1">
+<Scenario EntityName="products management scenario" IMemento.internal.id="4353" RelevantGoal="4865"/>
+<Actor EntityName="marketplace" IMemento.internal.id="11777"/>
+<Percept EntityName="search product" IMemento.internal.id="8961"/>
+<Action EntityName="put on sale" IMemento.internal.id="6145"/>
+<Action EntityName="retire from sale" IMemento.internal.id="7681"/>
+<Goal EntityName="add products" IMemento.internal.id="4865"/>
+<Actor EntityName="user" IMemento.internal.id="10241"/>
+</EntityPool>
+</Project>
