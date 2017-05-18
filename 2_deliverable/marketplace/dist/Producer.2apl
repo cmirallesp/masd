@@ -1,0 +1,17 @@
+
+
+beliefsupdates:
+  { not money(_)  } updateMoney(Qty) { money(Qty)}
+  { money(OldQty) } updateMoney(Qty) { money(Qty)}
+
+goals:
+
+
+pcrules:
+  event(name(Name), env) <- true | {
+    +name(Name);
+  }
+
+  event(updateMoney(Qty), env) <- true | {
+    updateMoney(Qty)
+  }
