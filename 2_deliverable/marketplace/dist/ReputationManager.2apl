@@ -12,6 +12,14 @@ pcrules:
   { 
     UpdateReview(Product,Score);
   }
+
+  message(Buyer, request,_,_,getReviews(Product)) <- true |
+  {
+    if B(review(Product,ListOfReviews))
+      send(Buyer, inform, reviewsAnswer(Product,ListOfReviews));
+    else
+      send(Buyer, inform, reviewsAnswer(Product,[]));
+  }
   
   event(name(Name), env) <- true | {
     +name(Name);

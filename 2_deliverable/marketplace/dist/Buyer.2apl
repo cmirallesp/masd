@@ -5,6 +5,10 @@ goals:
   sendReview(prod1, 12). 
   sendReview(prod2, 12). 
 
+  getReviews(prod1).
+  getReviews(prod2).
+  
+
 beliefupdates:
   % update searchedTimes first time
   {not searchedTimes(Desc,_)} 
@@ -25,7 +29,17 @@ beliefupdates:
   {productFounds(Id,_,OldQty), searchedTimes(Desc,N)} 
     UpdateFounds(Id,Desc,Qty) 
   {not productFounds(Id,_,OldQty), productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
-  
+
+  % update reviews first time
+  {not reviews(Product, ListOfReviews)}
+    UpdateReviews(Product, ListOfReviews)
+  { reviews(Product, ListOfReviews)}
+
+  % update reviews 
+  { reviews(Product, ListOfReviews)}
+    UpdateReviews(Product, NewListOfReviews)
+  { not reviews(Product, ListOfReviews), reviews(Product, NewListOfReviews) }
+
 pgrules:
   searchProduct(Desc) <- true | 
   {
@@ -46,13 +60,24 @@ pgrules:
   }
 
   sendReview(Prod,Score) <- true |
-  { 
+  { % request to the reviewer a new review
     send(reviewer, inform, addReview(Prod, Score));
     dropgoal(sendReview(Prod, Score));
   }
 
+  getReviews(Product) <- true |
+  { 
+    send(reviewer, request, getReviews(Product));
+    dropgoal(getReviews(Product));
+  }
+
+ 
 pcrules:
   event(name(Name), env) <- true | {
     +name(Name);
   }
 
+  message(ReputationManager, inform, _, _, reviewsAnswer(Product, ListOfReviews) ) <- true |
+  {
+    UpdateReviews(Product,ListOfReviews);
+  }
