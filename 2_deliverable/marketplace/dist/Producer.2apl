@@ -1,17 +1,48 @@
 
+beliefs:
+  % price of production of each type of products
+  prices([
+    [prod1,10],
+    [prod2,15],
+    [prod3,5]]).
 
-beliefsupdates:
-  { not money(_)  } updateMoney(Qty) { money(Qty)}
-  { money(OldQty) } updateMoney(Qty) { money(Qty)}
+  money(10).
+  % do we have enough money for producing product ProdId
+  enoughMoney(ProdId) :- prices(Prices), iEnoughMoney(ProdId,Prices).
+  iEnoughMoney(_,[],_) :- fail.
+  iEnoughMoney(ProdId,[[ProdId,Price] | _]) :- money(M),
+                                              M >= Price,!.
+  iEnoughMoney(ProdId,[_|Tail]) :- iEnoughMoney(ProdId, Tail).
+  
+  % Gets the actual price of product ProdId in Price
+  priceProduct(ProdId,Price) :- prices(Lst), iPriceProduct(ProdId,Lst,Price).
+  iPriceProduct(_,[],_) :- fail.
+  iPriceProduct(ProdId, [[ProdId,Price]|_], Price) :- !.
+  iPriceProduct(ProdId,[_ | Tail], Price) :- iPriceProduct(ProdId,Tail,Price).
+
+beliefupdates:
+  { not money(_)  } UpdateMoney(Qty) { money(Qty)}
+  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty)}
 
 goals:
+  produce(prod3,5).
 
-
+pgrules:
+  produce(ProdId,QualityCla) <- enoughMoney(ProdId) |
+  {
+    @env(produceProduct(ProdId,QualityCla),Y);
+    if B([ProdId,QualityAct]=Y) then {  
+      +product(ProdId,QualityCla,QualityAct);
+      if B(priceProduct(ProdId,Price) and money(M)) then{
+        UpdateMoney(M-Price);
+      }
+    }
+  }
 pcrules:
   event(name(Name), env) <- true | {
     +name(Name);
   }
 
   event(updateMoney(Qty), env) <- true | {
-    updateMoney(Qty)
+    UpdateMoney(Qty);
   }

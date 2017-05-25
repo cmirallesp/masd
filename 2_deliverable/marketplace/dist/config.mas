@@ -3,4 +3,5 @@
   <agent name="seller1" file="Seller.2apl"/>
   <agent name="buyer1" file="Buyer.2apl"/>
   <agent name="reviewer" file="ReputationManager.2apl"/>
+  <agent name="producer" file="Producer.2apl"/>
 </apaplmas>

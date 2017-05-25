@@ -6,7 +6,7 @@ import apapl.data.APLNum;
 import apapl.data.Term;
 import java.util.Hashtable;
 import apapl.data.APLList;
-
+import java.util.Random;
 /**
  * === About this file
  * This is an example of a very simple environment that communicates with a single 2APl agent.
@@ -54,7 +54,8 @@ public class Env extends Environment {
 		}
 	}
 	private final boolean log = true;
-	private Hashtable products = new Hashtable(); 
+	private Hashtable products = new Hashtable();
+	private final Random qualGenerator = new Random();
     /**
      * We do not use this method, but we need it so that the JAR file that we will create can point
      * to this class as the main class. This is only possible if the class contains  main method.
@@ -183,6 +184,15 @@ public class Env extends Environment {
 		else{
 			return new APLList();
 		}
+	}
+	
+	public Term produceProduct(String agName, APLIdent prodId, APLNum QualityCla){
+		int rnd = this.qualGenerator.nextInt(5); 
+		return new APLList(
+				prodId,
+				new APLNum(rnd)
+				);
+		
 	}
 	
 	private void log(String str) {
