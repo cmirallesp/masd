@@ -21,7 +21,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import apapl.data.APLList;
-
+import java.util.Random;
 /**
  * === About this file
  * This is an example of a very simple environment that communicates with a single 2APl agent.
@@ -68,18 +68,19 @@ public class Env extends Environment {
 			this.qty = _qty;
 		}
 	}
-	
+
 	private HttpServer server = null;
 	private final boolean log = true;
-	private Hashtable<Integer, Product> products = new Hashtable<Integer, Product>(); 
-	
+	private final Random qualGenerator = new Random();
+	private Hashtable<Integer, Product> products = new Hashtable<Integer, Product>();
+
     /**
      * We do not use this method, but we need it so that the JAR file that we will create can point
      * to this class as the main class. This is only possible if the class contains  main method.
      * @param args arguments
      */
 	public static void main(String [] args) {
-		
+
 		// Just to be able to try it out
 		Env env = new Env();
 		try {
@@ -88,7 +89,7 @@ public class Env extends Environment {
 			//Not working?!
 			e.printStackTrace();
 		}
-		
+
 	}
 	
 	/**
@@ -120,7 +121,7 @@ public class Env extends Environment {
 		
 		// note: we can also throw an event to all agents by letting out the last parameter: 
 		// throwEvent(event);
-		
+
 		// If the environment was not running, make it run
 		if (this.server == null) {
 			try {
@@ -223,6 +224,15 @@ public class Env extends Environment {
 		}
 	}
 	
+	public Term produceProduct(String agName, APLIdent prodId, APLNum QualityCla){
+		int rnd = this.qualGenerator.nextInt(5);
+		return new APLList(
+				prodId,
+				new APLNum(rnd)
+				);
+
+	}
+
 	private void log(String str) {
 		if (log) System.out.println(str);
 	}
@@ -237,12 +247,12 @@ public class Env extends Environment {
 	                          String key = null;
 	                          String value = null;
 	                          if (param.length > 0) {
-	                          key = URLDecoder.decode(param[0], 
+	                          key = URLDecoder.decode(param[0],
 	                          	System.getProperty("file.encoding"));
 	                          }
 
 	                          if (param.length > 1) {
-	                                   value = URLDecoder.decode(param[1], 
+	                                   value = URLDecoder.decode(param[1],
 	                                   System.getProperty("file.encoding"));
 	                          }
 
@@ -268,15 +278,15 @@ public class Env extends Environment {
 
 		@Override
 		public void handle(HttpExchange arg0) throws IOException {
-			
+
 		}
 	}
-	
+
 	public void runServer() throws IOException {
 		int port = 9000;
 		server = HttpServer.create(new InetSocketAddress(port), 0);
 		System.out.println("server started at " + port);
-		
+
 		server.createContext("/", new HttpHandler() {
 			@Override
 			   public void handle(HttpExchange he) throws IOException {
@@ -287,12 +297,12 @@ public class Env extends Environment {
 	                os.close();
 	        }
 		});
-		
+
 		server.createContext("/echoGet", new HttpGetHandler() {
-			
+
 	         @Override
 	         public void handle(HttpExchange he) throws IOException {
-	        	 
+
 	                 // parse request
 	                 HashMap<String,Object> parameters = new HashMap<String, Object>();
 	                 URI requestedUri = he.getRequestURI();
@@ -310,7 +320,7 @@ public class Env extends Environment {
 	                 os.close();
 	         }
 		});
-		
+
 		server.setExecutor(null);
 		server.start();
 	}
