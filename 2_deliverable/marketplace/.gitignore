@@ -1,1 +1,5 @@
 /bin/
+/dist/Environment2APL.jar
+.idea/kotlinc.xml
+.idea/workspace.xml
+dist/marketplace/

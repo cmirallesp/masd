@@ -4,7 +4,22 @@ import apapl.data.APLFunction;
 import apapl.data.APLIdent;
 import apapl.data.APLNum;
 import apapl.data.Term;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.List;
+
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
 import apapl.data.APLList;
 
 /**
@@ -53,14 +68,27 @@ public class Env extends Environment {
 			this.qty = _qty;
 		}
 	}
+	
+	private HttpServer server = null;
 	private final boolean log = true;
-	private Hashtable products = new Hashtable(); 
+	private Hashtable<Integer, Product> products = new Hashtable<Integer, Product>(); 
+	
     /**
      * We do not use this method, but we need it so that the JAR file that we will create can point
      * to this class as the main class. This is only possible if the class contains  main method.
      * @param args arguments
      */
 	public static void main(String [] args) {
+		
+		// Just to be able to try it out
+		Env env = new Env();
+		try {
+			env.runServer();
+		} catch (IOException e) {
+			//Not working?!
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -92,6 +120,16 @@ public class Env extends Environment {
 		
 		// note: we can also throw an event to all agents by letting out the last parameter: 
 		// throwEvent(event);
+		
+		// If the environment was not running, make it run
+		if (this.server == null) {
+			try {
+				this.runServer();
+			} catch (IOException e) {
+				// The port is occupied, skip
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
@@ -187,5 +225,93 @@ public class Env extends Environment {
 	
 	private void log(String str) {
 		if (log) System.out.println(str);
+	}
+
+	private static class HttpGetHandler implements HttpHandler {
+		public static void parseQuery(String query, HashMap<String, Object> parameters) throws UnsupportedEncodingException {
+
+	         if (query != null) {
+	                 String pairs[] = query.split("[&]");
+	                 for (String pair : pairs) {
+	                          String param[] = pair.split("[=]");
+	                          String key = null;
+	                          String value = null;
+	                          if (param.length > 0) {
+	                          key = URLDecoder.decode(param[0], 
+	                          	System.getProperty("file.encoding"));
+	                          }
+
+	                          if (param.length > 1) {
+	                                   value = URLDecoder.decode(param[1], 
+	                                   System.getProperty("file.encoding"));
+	                          }
+
+	                          if (parameters.containsKey(key)) {
+	                                   Object obj = parameters.get(key);
+	                                   if (obj instanceof List<?>) {
+	                                            @SuppressWarnings("unchecked")
+												List<String> values = (List<String>) obj;
+	                                            values.add(value);
+
+	                                   } else if (obj instanceof String) {
+	                                            List<String> values = new ArrayList<String>();
+	                                            values.add((String) obj);
+	                                            values.add(value);
+	                                            parameters.put(key, values);
+	                                   }
+	                          } else {
+	                                   parameters.put(key, value);
+	                          }
+	                 }
+	         }
+	}
+
+		@Override
+		public void handle(HttpExchange arg0) throws IOException {
+			
+		}
+	}
+	
+	public void runServer() throws IOException {
+		int port = 9000;
+		server = HttpServer.create(new InetSocketAddress(port), 0);
+		System.out.println("server started at " + port);
+		
+		server.createContext("/", new HttpHandler() {
+			@Override
+			   public void handle(HttpExchange he) throws IOException {
+	                String response = "<h1>Server start success if you see this message</h1>" + "<h1>Yaaay!</h1>";
+	                he.sendResponseHeaders(200, response.length());
+	                OutputStream os = he.getResponseBody();
+	                os.write(response.getBytes());
+	                os.close();
+	        }
+		});
+		
+		server.createContext("/echoGet", new HttpGetHandler() {
+			
+	         @Override
+	         public void handle(HttpExchange he) throws IOException {
+	        	 
+	                 // parse request
+	                 HashMap<String,Object> parameters = new HashMap<String, Object>();
+	                 URI requestedUri = he.getRequestURI();
+	                 String query = requestedUri.getRawQuery();
+	                 parseQuery(query, parameters);
+
+	                 // send response
+	                 String response = "Get request recived to "+requestedUri.toString()+" with parameters:\n";
+	                 for (String key : parameters.keySet())
+	                          response += key + " = " + parameters.get(key) + "\n";
+	                 he.sendResponseHeaders(200, response.length());
+	                 OutputStream os = he.getResponseBody();
+	                 os.write(response.toString().getBytes());
+
+	                 os.close();
+	         }
+		});
+		
+		server.setExecutor(null);
+		server.start();
 	}
 }
