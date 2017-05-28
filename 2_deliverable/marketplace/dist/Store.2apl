@@ -1,0 +1,17 @@
+include: Seller.2apl;
+include: Buyer.2apl;
+
+beliefupdates:
+  % money: update money quantity
+  { not money(_)  } UpdateMoney(Qty) { money(Qty)}
+  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty)}
+
+pcrules:
+  event(updateMoney(Qty), env) <- true | {
+  UpdateMoney(Qty);
+  }
+
+  % UpdateOnSale(Id, Qty) is declared inside Seller.2apl
+  event(stocksSensor(Id,Qty), env) <- true | {
+  UpdateOnSale(Id,Qty);
+  }
