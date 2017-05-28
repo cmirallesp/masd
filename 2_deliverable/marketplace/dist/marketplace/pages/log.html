@@ -1,0 +1,8 @@
+<!-- Page Content -->
+<div class="container">
+    <div class="list-group">
+	<span ng-repeat="line in events" class="list-group-item">
+    	<strong>{{line.timestamp | date:'HH:mm:ss'}}:</strong> {{line.message}} <span ng-if="line.agent">[{{line.agent}}]</span>
+	</span>
+    </div>
+</div>
