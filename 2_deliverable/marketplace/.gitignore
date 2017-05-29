@@ -1,2 +1,3 @@
 /bin/
-/dist/Environment2APL.jar
+/dist/*.jar
+.classpath
