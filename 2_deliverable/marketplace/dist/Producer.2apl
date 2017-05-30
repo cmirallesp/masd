@@ -1,3 +1,5 @@
+include: Common.2apl;
+include: Seller.2apl;
 
 beliefs:
   % price of production of each type of products

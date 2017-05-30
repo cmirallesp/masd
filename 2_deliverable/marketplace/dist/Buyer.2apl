@@ -73,10 +73,6 @@ pgrules:
 
  
 pcrules:
-  event(name(Name), env) <- true | {
-    +name(Name);
-  }
-
   message(ReputationManager, inform, _, _, reviewsAnswer(Product, ListOfReviews) ) <- true |
   {
     UpdateReviews(Product,ListOfReviews);
