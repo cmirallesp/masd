@@ -19,16 +19,11 @@ beliefupdates:
   {searchedTimes(Desc,N)} 
     UpdateSearchedTimes(Desc) 
   { not searchedTimes(Desc,N), searchedTimes(Desc,N+1) }
-  
-  % update productFounds first time
-  {not productFounds(Id,_,_), searchedTimes(Desc,N)} 
-    UpdateFounds(Id,Desc,Qty) 
-  {productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
 
   % update productFounds 
-  {productFounds(Id,_,OldQty), searchedTimes(Desc,N)} 
+  {have(Id,_,_), searchedTimes(Desc,N)} 
     UpdateFounds(Id,Desc,Qty) 
-  {not productFounds(Id,_,OldQty), productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
+  {not have(Id,_,_), have(Id,Desc,Qty), not searchedTimes(Desc,N)}
 
   % update reviews first time
   {not reviews(Product, ListOfReviews)}
