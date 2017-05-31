@@ -70,10 +70,22 @@ public class Env extends Environment {
     private final Random qualGenerator = new Random();
 
     // All loggers
+    private Map<String, ProductTypePrices> productPrices = new HashMap<>();
+    {
+    	productPrices.put("smartphone1", new ProductTypePrices(70, 600));
+    	productPrices.put("smartphone2", new ProductTypePrices(50, 300));
+    	productPrices.put("smartphone3", new ProductTypePrices(60, 400));
+    	productPrices.put("smartwatch", new ProductTypePrices(20, 100));
+    	productPrices.put("tablet", new ProductTypePrices(70, 400));
+    	productPrices.put("console1", new ProductTypePrices(50, 200));
+    	productPrices.put("console2", new ProductTypePrices(70, 300));
+    	productPrices.put("console3", new ProductTypePrices(50, 150));
+    	productPrices.put("console4", new ProductTypePrices(60, 200));
+    }
     private Map<Integer, Product> products = new HashMap<>();
     private Map<String, Agent> agents = new HashMap<>();
     private Logger logger = new Logger();
-
+    private int nextId = 0; // products must have unique ids. Maintain a counter
 
     private static String BASE_PATH;
     private static List<String> RANDOM_IMAGES = new LinkedList<>();
@@ -100,7 +112,7 @@ public class Env extends Environment {
             for (File image : imagesFolder.listFiles()) {
                 String name = image.getName();
                 name = name.substring(0, name.lastIndexOf('.'));
-                if (name.substring(0, 7).equals("random_")) {
+                if (name.length() >= 7 && name.substring(8).equals("random_")) {
                     RANDOM_IMAGES.add("/marketplace/images/products/"+image.getName());
                 } else {
                     IMAGES.put(name, "/marketplace/images/products/"+image.getName());
@@ -178,6 +190,12 @@ public class Env extends Environment {
         this.logger.addLog(event);
         if (agent != null) agent.addLog(event);
         if (product != null) product.addLog(event);
+    }
+    
+    synchronized private int getUniqueId() {
+    	int id = nextId;
+    	nextId += 1;
+    	return id;
     }
 
     /**
@@ -314,13 +332,50 @@ public class Env extends Environment {
         }
     }
 
-    public Term produceProduct(String agName, APLIdent prodId, APLNum QualityCla) {
-        int rnd = this.qualGenerator.nextInt(5);
-        return new APLList(
-                prodId,
-                new APLNum(rnd)
-        );
-
+    public Term produceProduct(String agName, APLIdent prodType) throws ExternalActionFailedException {
+    	if (productPrices.containsKey(prodType.toString())) {
+    		ProductTypePrices prices = productPrices.get(prodType.toString());
+    		Agent agent = agents.get(agName);
+    		if (agent.getMoney() >= prices.getProductionPrice()) {
+    			APLNum quality = new APLNum(this.qualGenerator.nextInt(10));
+                APLNum id = new APLNum(this.getUniqueId());
+                agent.setMoney(agent.getMoney() - prices.getProductionPrice());
+                // Even if the agent updates its belief after executing this action, fire an UpdateMoney
+                // event just in case
+                updateMoney(agName, agent.getMoney());
+                return new APLList(id, prodType, quality);
+    		} else {
+    			String msg = "Agent " + agName + " has not enough money to produce " + prodType;
+    			this.addLog(msg, agent, null);
+    			throw new ExternalActionFailedException(msg);
+    		}
+    		
+    	} else {
+    		String msg = "Unknown product type: " + prodType;
+    		this.addLog(msg, null, null);
+    		throw new ExternalActionFailedException(msg);
+    	}
+    	
+    }
+    
+    public Term enterMarket(String agName, APLIdent role) throws ExternalActionFailedException {
+    	Agent agent = new Agent(agName);
+    	switch (role.toString()) {
+    	case "producer":
+    		agent.setMoney(300);
+    		break;
+    	case "store":
+    		agent.setMoney(200);
+    		break;
+    	case "enduser":
+    		agent.setMoney(100);
+    		break;
+    	default:
+    		throw new ExternalActionFailedException("Unknown role: " + role.toString());
+    	}
+    	agents.put(agName, agent);
+    	updateMoney(agName, agent.getMoney());
+    	return null;
     }
 
     public void updateMoney(String agName, int amount) {

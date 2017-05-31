@@ -1,9 +1,9 @@
 plans:
-  AddItem(1, 1, 10);
-  AddItem(2, 3, 7);
-  AddItem(2, 3, 7);
+  B(role(Role));
+  @env(enterMarket(Role), _);
 
 beliefs:
+  money(0).
   % True with a certain probability. Useful to let some decisions to randomness.
   roll(Probability):- is(X, random(1)), X =< Probability.
   
@@ -11,13 +11,5 @@ beliefupdates:
   % money: update money quantity
   { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty) }
   { not(have(ProductId, _, _)) } AddItem(ProductId, Type, Quality) {have(ProductId, Type, Quality)}
-
-prrules:
-  UpdateMoney(Qty); REST; <- true |
-  {
-    +money(Qty);
-    REST;
-  }
-
 
 
