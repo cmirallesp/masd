@@ -22,10 +22,6 @@ beliefs:
   iPriceProduct(ProdId, [[ProdId,Price]|_], Price) :- !.
   iPriceProduct(ProdId,[_ | Tail], Price) :- iPriceProduct(ProdId,Tail,Price).
 
-beliefupdates:
-  { not money(_)  } UpdateMoney(Qty) { money(Qty)}
-  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty)}
-
 goals:
   produce(prod3,5).
 

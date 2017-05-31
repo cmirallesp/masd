@@ -5,17 +5,23 @@ import apapl.data.APLIdent;
 import apapl.data.APLNum;
 import apapl.data.Term;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URLDecoder;
-import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -64,8 +70,8 @@ public class Env extends Environment {
     private final Random qualGenerator = new Random();
 
     // All loggers
-    private Hashtable<Integer, Product> products = new Hashtable<>();
-    private Hashtable<String, Agent> agents = new Hashtable<>();
+    private Map<Integer, Product> products = new HashMap<>();
+    private Map<String, Agent> agents = new HashMap<>();
     private Logger logger = new Logger();
 
 

@@ -1,22 +1,23 @@
+plans:
+  AddItem(1, 1, 10);
+  AddItem(2, 3, 7);
+  AddItem(2, 3, 7);
+
+beliefs:
+  % True with a certain probability. Useful to let some decisions to randomness.
+  roll(Probability):- is(X, random(1)), X =< Probability.
+  
 beliefupdates:
   % money: update money quantity
-  { not money(_)  } UpdateMoney(Qty) { money(Qty)}
-  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty)}
+  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty) }
+  { not(have(ProductId, _, _)) } AddItem(ProductId, Type, Quality) {have(ProductId, Type, Quality)}
 
-  % items: if there's no such item -- add, remove otherwise
-  {not possess(Desc)} UpdateItems(Desc) {possess(Desc)}
-  {possess(Desc)} UpdateItems(Desc) {not possess(Desc)}
-
-pcrules:
-  event(updateMoney(Qty), env) <- true | {
-    UpdateMoney(Qty);
+prrules:
+  UpdateMoney(Qty); REST; <- true |
+  {
+    +money(Qty);
+    REST;
   }
 
-  event(name(Name), env) <- true | {
-    +name(Name);
-  }
 
-  event(updateItems(Desc), env) <- true | {
-    UpdateItems(Desc);
-  }
 
