@@ -50,7 +50,23 @@ class Product extends Logger {
         updateLastModified();
     }
 
-    int getId() {
+    public int getMsrp() {
+		return msrp;
+	}
+
+	public void setMsrp(int msrp) {
+		this.msrp = msrp;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	int getId() {
         return id;
     }
 

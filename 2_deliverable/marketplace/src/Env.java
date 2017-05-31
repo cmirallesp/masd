@@ -337,13 +337,16 @@ public class Env extends Environment {
     		ProductTypePrices prices = productPrices.get(prodType.toString());
     		Agent agent = agents.get(agName);
     		if (agent.getMoney() >= prices.getProductionPrice()) {
-    			APLNum quality = new APLNum(this.qualGenerator.nextInt(10));
-                APLNum id = new APLNum(this.getUniqueId());
+    			int id = this.getUniqueId();
+    			int quality = this.qualGenerator.nextInt(11);
+    			Product product = new Product(id, prodType.toString(), 1);
+    			product.setMsrp(prices.getRecommendedPrice(quality));
+    			products.put(id, product);
                 agent.setMoney(agent.getMoney() - prices.getProductionPrice());
                 // Even if the agent updates its belief after executing this action, fire an UpdateMoney
                 // event just in case
                 updateMoney(agName, agent.getMoney());
-                return new APLList(id, prodType, quality);
+                return new APLList(new APLNum(id), prodType, new APLNum(quality));
     		} else {
     			String msg = "Agent " + agName + " has not enough money to produce " + prodType;
     			this.addLog(msg, agent, null);
