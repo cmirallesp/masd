@@ -81,6 +81,21 @@ public class Env extends Environment {
     	productionPrices.put("console2", 70);
     	productionPrices.put("console3", 50);
     	productionPrices.put("console4", 60);
+        
+        productionPrices.put("manual_1", 10);
+        productionPrices.put("manual_2", 5);
+        
+        productionPrices.put("forehead_thermometer_1", 15);
+        productionPrices.put("forehead_thermometer_2", 20);
+        productionPrices.put("forehead_thermometer_3", 25);
+        
+        productionPrices.put("humidifier_1", 30);
+        productionPrices.put("humidifier_2", 35);
+        
+        productionPrices.put("camera_1", 20);
+        productionPrices.put("camera_2", 40);
+        productionPrices.put("camera_3", 60);
+        
     }
     private Map<Integer, Product> products = new HashMap<>();
     private Map<String, Agent> agents = new HashMap<>();
