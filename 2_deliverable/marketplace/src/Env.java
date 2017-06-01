@@ -270,7 +270,8 @@ public class Env extends Environment {
      * @return The idProd and qty in a APLList
      */
     public Term putOnSale(String agName, APLNum idProd, APLNum announcedQuality, APLNum price) throws ExternalActionFailedException {
-    	
+    	System.out.println("Putting on sale " + idProd);
+
     	if (!products.containsKey(idProd.toInt())) {
     		String msg = "There is not any product with id " + idProd;
     		this.addLog(msg, agents.get(agName), null);
@@ -330,13 +331,11 @@ public class Env extends Environment {
 
     //exact search for the moment (fuzzy?)
     public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
-    	System.out.println("searchProduct()");
     	Agent agent = agents.get(agName);
     	String allowedSellerRole = agent.getRole().equals("store")? "producer" : "store";
-        addLog(String.format("Search Product %", prodDesc.toString()), agents.get(agName), null);
+        addLog("Search Product %s " + prodDesc.toString(), agent, null);
         LinkedList<Term> foundProducts = new LinkedList<>();
         for (Product product : products.values()) {
-        	System.out.println(product.getType());
         	Agent seller = agents.get(product.getOwner());
         	if (product.isOnSale() && product.getType().equals(prodDesc.toString()) && 
         			seller.getRole().equals(allowedSellerRole)) {
@@ -347,7 +346,6 @@ public class Env extends Environment {
         									  new APLIdent(product.getOwner())));
         	}
         }
-        System.out.println(foundProducts.size() + " products");
         // list of lists. Each inner list has the form [ProductId, Type, AnnouncedQuality, Price, Seller]
         return new APLList(foundProducts);
     }

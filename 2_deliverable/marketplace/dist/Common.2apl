@@ -3,6 +3,7 @@ plans:
   @env(enterMarket(Role), _);
 
 beliefs:
+  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
   % Product types
   type(smartphone1).
   type(smartphone2).

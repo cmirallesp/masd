@@ -11,7 +11,7 @@ beliefs:
     Score > BestNow, bestProduct(T, H, Best), !.
   bestProduct([_|T], BestNow, Best):- bestProduct(T, BestNow, Best).
   bestProduct([H|T], Best):- bestProduct(T, H, Best).
-  role(enduser).
+  role(store).
 
 goals:
   stock(tablet, 1).
@@ -59,6 +59,12 @@ pcrules:
       % Do something else if it's the same
       -buyProtocolOn(Type);
     }
+  }
+
+prrules:
+  B(bestProduct(Products, Best)); REST; <- true |
+  {
+    wait(3);
   }
 
 %goals:
