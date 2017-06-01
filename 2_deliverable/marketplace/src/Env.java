@@ -63,7 +63,7 @@ import com.sun.net.httpserver.HttpServer;
 public class Env extends Environment {
 
     private HttpServer server = null;
-    private final Random qualGenerator = new Random();
+    private final Random rng = new Random();
 
     // All loggers
     private Map<String, Integer> productionPrices = new HashMap<>();
@@ -262,7 +262,8 @@ public class Env extends Environment {
      * @return The idProd and qty in a APLList
      */
     public Term putOnSale(String agName, APLNum idProd, APLNum announcedQuality, APLNum price) throws ExternalActionFailedException {
-    	
+    	System.out.println("Putting on sale " + idProd);
+
     	if (!products.containsKey(idProd.toInt())) {
     		String msg = "There is not any product with id " + idProd;
     		this.addLog(msg, agents.get(agName), null);
@@ -324,25 +325,21 @@ public class Env extends Environment {
     public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
     	Agent agent = agents.get(agName);
     	String allowedSellerRole = agent.getRole().equals("store")? "producer" : "store";
-        addLog(String.format("Search Product %", prodDesc.toString()), agents.get(agName), null);
-        Product found = null;
+        addLog("Search Product %s " + prodDesc.toString(), agent, null);
+        LinkedList<Term> foundProducts = new LinkedList<>();
         for (Product product : products.values()) {
         	Agent seller = agents.get(product.getOwner());
         	if (product.isOnSale() && product.getType().equals(prodDesc.toString()) && 
         			seller.getRole().equals(allowedSellerRole)) {
-        		found = product;
-        		break;
+        		foundProducts.add(new APLList(new APLNum(product.getId()),
+        									  new APLIdent(product.getType()),
+        									  new APLNum(product.getAnnouncedQuality()),
+        									  new APLNum(product.getPrice()),
+        									  new APLIdent(product.getOwner())));
         	}
         }
-
-        if (found != null) {
-            return new APLList(
-                    new APLNum(found.getId()),
-                    new APLIdent(found.getType()),
-                    new APLNum(found.getAnnouncedQuality()));
-        } else {
-            return new APLList();
-        }
+        // list of lists. Each inner list has the form [ProductId, Type, AnnouncedQuality, Price, Seller]
+        return new APLList(foundProducts);
     }
 
     public Term produceProduct(String agName, APLIdent prodType) throws ExternalActionFailedException {
@@ -351,7 +348,7 @@ public class Env extends Environment {
     		Agent agent = agents.get(agName);
     		if (price != null && agent.getMoney() >= price) {
     			int id = this.getUniqueId();
-    			int quality = this.qualGenerator.nextInt(11);
+    			int quality = this.rng.nextInt(11);
     			Product product = new Product(id, prodType.toString(), 1);
     			product.setRealQuality(quality);
     			product.setOwner(agName);
@@ -373,6 +370,34 @@ public class Env extends Environment {
     		throw new ExternalActionFailedException(msg);
     	}
     	
+    }
+    
+    public Term shipMoney(String agName, APLIdent dst, APLNum concept, APLNum money) throws ExternalActionFailedException {
+    	Agent agent = agents.get(agName);
+    	Agent receiver = agents.get(dst.toString());
+    	if (agent.getMoney() < money.toInt()) {
+    		throw new ExternalActionFailedException("Agent has not enough money to transfer");
+    	}
+    	agent.setMoney(agent.getMoney() - money.toInt());
+    	receiver.setMoney(receiver.getMoney() + money.toInt());
+    	APLFunction event = new APLFunction("moneyTransfer", money, concept);
+    	throwEvent(event, receiver.getName());
+    	return null;
+    }
+    
+    public Term shipProduct(String agName, APLIdent dst, APLNum product) throws ExternalActionFailedException {
+    	Product prod = products.get(product.toInt());
+    	if (!prod.getOwner().equals(agName)) {
+    		throw new ExternalActionFailedException("Agent does not have product");
+    	}
+    	prod.setOwner(dst.toString());
+    	prod.setOnSale(false);
+    	int probabilityRealizing = Math.abs(prod.getAnnouncedQuality() - prod.getRealQuality())*10;
+    	boolean bluffUncovered = rng.nextInt(100) < probabilityRealizing;
+    	int notifiedQuality = bluffUncovered? prod.getRealQuality() : prod.getAnnouncedQuality();
+    	APLFunction event = new APLFunction("productTransfer", product, new APLIdent(prod.getType()), new APLNum(notifiedQuality));
+    	throwEvent(event, dst.toString());
+    	return null;
     }
     
     public Term enterMarket(String agName, APLIdent role) throws ExternalActionFailedException {
@@ -420,6 +445,7 @@ public class Env extends Environment {
         throwEvent(event, agName);
         addLog(String.format("Update money $%d", amount), agents.get(agName), null);
     }
+    
 
     private static class HttpGetHandler implements HttpHandler {
 

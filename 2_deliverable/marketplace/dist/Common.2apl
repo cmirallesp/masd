@@ -3,6 +3,7 @@ plans:
   @env(enterMarket(Role), _);
 
 beliefs:
+  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
   % Product types
   type(smartphone1).
   type(smartphone2).
@@ -24,6 +25,7 @@ beliefupdates:
   % money: update money quantity
   { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty) }
   { not(have(ProductId, _, _)) } AddItem(ProductId, Type, Quality) {have(ProductId, Type, Quality)}
+  { have(ProductId, Type, Quality) } RemoveItem(ProductId) { not have(ProductId, Type, Quality) }
 
 pcrules:
   event(name(Name), env) <- true | {
@@ -32,5 +34,13 @@ pcrules:
 
   event(updateMoney(Qty), env) <- true | {
     UpdateMoney(Qty);
+  }
+
+  wait(Cycles) <- true |
+  {
+    if (B(Cycles > 0)) {
+      B(is(Cycles1, Cycles -1));
+      wait(Cycles1);
+    }
   }
 

@@ -1,24 +1,33 @@
+beliefs:
+  mean(Seller,0) :-  not(review(Seller,_)),!.
+  mean(Seller,R) :- review(Seller,Lst), imean(Seller,Lst,0,0,R).
+  imean(_,[],Acum,N,R) :- is(R,Acum/N),!.
+  imean(Seller,[X|T],Acum,N,R) :- is(Acum2,Acum+X),
+                                  is(N2, N+1),
+                                  imean(Seller,T,Acum2,N2,R).
+
+
 beliefupdates:
-  {not review(Product,_)} 
-    UpdateReview(Product, Score) 
-  { review(Product,[Score])}
+  {not review(Seller,_)} 
+    UpdateReview(Seller, Score) 
+  { review(Seller,[Score])}
   
-  {review(Product,Scores)} 
-    UpdateReview(Product, Score) 
-  { not review(Product,Scores), review(Product,[Score|Scores])}
+  {review(Seller,Scores)} 
+    UpdateReview(Seller, Score) 
+  { not review(Seller,Scores), review(Seller,[Score|Scores])}
 
 pcrules:
-  message(Buyer, inform, _, _, addReview(Product, Score)) <- true |
+  message(Buyer, inform, _, _, addReview(Seller, Score)) <- true |
   { 
-    UpdateReview(Product,Score);
+    UpdateReview(Seller,Score);
   }
 
-  message(Buyer, request,_,_,getReviews(Product)) <- true |
+  message(Buyer, request,_,_,getReviews(Seller)) <- true |
   {
-    if B(review(Product,ListOfReviews))
-      send(Buyer, inform, reviewsAnswer(Product,ListOfReviews));
+    if B(review(Seller,ListOfReviews))
+      send(Buyer, inform, reviewsAnswer(Seller,ListOfReviews));
     else
-      send(Buyer, inform, reviewsAnswer(Product,[]));
+      send(Buyer, inform, reviewsAnswer(Seller,[]));
   }
   
   event(name(Name), env) <- true | {

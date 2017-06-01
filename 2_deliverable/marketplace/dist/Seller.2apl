@@ -1,7 +1,6 @@
 include: Common.2apl;
 
 beliefs:
-  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
   retailPrice(Type, Quality, Price):- type(Type), stock(Type, Stock), c(C), lambda(Lambda),
                                       recommendedPrice(Type, Quality, RPrice),
                                       is(Price, RPrice + int(C*exp(-Lambda*Stock))).
@@ -17,9 +16,10 @@ goals:
 
 beliefupdates:
   { not(onSale(Id, _)), have(Id, _, _) } PutOnSale(Id, Price) { onSale(Id, Price) }
+  { onSale(Id, Price) } RemoveFromSale(Id) { not onSale(Id, Price) }
 
 pgrules:
-  gainMoney <- have(Id, Type, Quality) and not(onSale(Id, _)) |
+  gainMoney <- have(Id, Type, Quality) and not(onSale(Id, _)) and not(reserved(Id, _)) |
   {
     B(retailPrice(Type, Quality, Price));
     @env(putOnSale(Id, Quality, Price));
@@ -37,5 +37,14 @@ pcrules:
   message(Buyer, request, _, _, wantToBuy(ProductId)) <- true |
   {
     send(Buyer, refuse, buyRefused(ProductId));
+  }
+
+  event(moneyTransfer(Transfer, ProductId), env) <- reserved(ProductId, Buyer) | {
+    B(money(MoneyBefore));
+    B(is(MoneyAfter, MoneyBefore + Transfer));
+    UpdateMoney(MoneyAfter);
+    @env(shipProduct(Buyer, ProductId));
+    RemoveFromSale(ProductId);
+    RemoveItem(ProductId);
   }
 
