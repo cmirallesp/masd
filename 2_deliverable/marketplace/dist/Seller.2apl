@@ -17,6 +17,7 @@ goals:
 
 beliefupdates:
   { not(onSale(Id, _)), have(Id, _, _) } PutOnSale(Id, Price) { onSale(Id, Price) }
+  { onSale(Id, Price) } RemoveFromSale(Id) { not onSale(Id, Price) }
 
 pgrules:
   gainMoney <- have(Id, Type, Quality) and not(onSale(Id, _)) |
@@ -37,5 +38,14 @@ pcrules:
   message(Buyer, request, _, _, wantToBuy(ProductId)) <- true |
   {
     send(Buyer, refuse, buyRefused(ProductId));
+  }
+
+  event(moneyTransfer(Transfer, ProductId), env) <- reserved(ProductId, Buyer) | {
+    B(money(MoneyBefore));
+    B(is(MoneyAfter, MoneyBefore + Transfer));
+    UpdateMoney(MoneyAfter);
+    @env(shipProduct(Buyer, ProductId));
+    RemoveFromSale(ProductId);
+    RemoveItem(ProductId);
   }
 

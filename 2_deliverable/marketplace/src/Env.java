@@ -67,7 +67,7 @@ import apapl.data.APLList;
 public class Env extends Environment {
 
     private HttpServer server = null;
-    private final Random qualGenerator = new Random();
+    private final Random rng = new Random();
 
     // All loggers
     private Map<String, Integer> productionPrices = new HashMap<>();
@@ -359,7 +359,7 @@ public class Env extends Environment {
     		Agent agent = agents.get(agName);
     		if (price != null && agent.getMoney() >= price) {
     			int id = this.getUniqueId();
-    			int quality = this.qualGenerator.nextInt(11);
+    			int quality = this.rng.nextInt(11);
     			Product product = new Product(id, prodType.toString(), 1);
     			product.setRealQuality(quality);
     			product.setOwner(agName);
@@ -381,6 +381,34 @@ public class Env extends Environment {
     		throw new ExternalActionFailedException(msg);
     	}
     	
+    }
+    
+    public Term shipMoney(String agName, APLIdent dst, APLNum concept, APLNum money) throws ExternalActionFailedException {
+    	Agent agent = agents.get(agName);
+    	Agent receiver = agents.get(dst.toString());
+    	if (agent.getMoney() < money.toInt()) {
+    		throw new ExternalActionFailedException("Agent has not enough money to transfer");
+    	}
+    	agent.setMoney(agent.getMoney() - money.toInt());
+    	receiver.setMoney(receiver.getMoney() + money.toInt());
+    	APLFunction event = new APLFunction("moneyTransfer", money, concept);
+    	throwEvent(event, receiver.getName());
+    	return null;
+    }
+    
+    public Term shipProduct(String agName, APLIdent dst, APLNum product) throws ExternalActionFailedException {
+    	Product prod = products.get(product.toInt());
+    	if (!prod.getOwner().equals(agName)) {
+    		throw new ExternalActionFailedException("Agent does not have product");
+    	}
+    	prod.setOwner(dst.toString());
+    	prod.setOnSale(false);
+    	int probabilityRealizing = Math.abs(prod.getAnnouncedQuality() - prod.getRealQuality())*10;
+    	boolean bluffUncovered = rng.nextInt(100) < probabilityRealizing;
+    	int notifiedQuality = bluffUncovered? prod.getRealQuality() : prod.getAnnouncedQuality();
+    	APLFunction event = new APLFunction("productTransfer", product, new APLIdent(prod.getType()), new APLNum(notifiedQuality));
+    	throwEvent(event, dst.toString());
+    	return null;
     }
     
     public Term enterMarket(String agName, APLIdent role) throws ExternalActionFailedException {
@@ -409,6 +437,7 @@ public class Env extends Environment {
         throwEvent(event, agName);
         addLog(String.format("Update money $%d", amount), agents.get(agName), null);
     }
+    
 
     private static class HttpGetHandler implements HttpHandler {
 

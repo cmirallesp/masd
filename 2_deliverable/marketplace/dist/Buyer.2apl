@@ -1,30 +1,44 @@
 include: Common.2apl;
 
+%plans:
+  %wait(5);
+  %initBuyProtocol(0, tablet, 5, 10, producer);
+
 beliefs:
   role(enduser).
 
 pcrules:
-  initBuyProtocol(ProductId, Type, Price, Seller) <-
+  initBuyProtocol(ProductId, Type, Quality, Price, Seller) <-
     not(confirmationPending(ProductId, _, _, _)) and
     enoughMoney(Price) |
   {
     send(Seller, request, wantToBuy(ProductId));
-    % UpdateMoney belief so we do not count on having more money than what we
-    % actually have for future transactions.
-    +confirmationPending(ProductId, Type, Price, Seller);
+    +confirmationPending(ProductId, Type, Quality, Price, Seller);
   }
 
   message(Seller, inform, _, _, buyAccepted(ProductId)) <-
-    confirmationPending(ProductId, Type, Price, Seller) |
+    confirmationPending(ProductId, Type, Quality, Price, Seller) |
   {
-    -confirmationPending(ProductId, Type, Price, Seller);
-    % Perform money transfer...
+    -confirmationPending(ProductId, Type, Quality, Price, Seller);
+    @env(shipMoney(Seller, ProductId, Price));
+    B(money(MoneyBefore) and is(MoneyAfter, MoneyBefore - Price));
+    UpdateMoney(MoneyAfter);
   }
 
   message(Seller, refuse, _, _, buyRefused(ProductId)) <-
-    confirmationPending(ProductId, Type, Price, Seller) |
+    confirmationPending(ProductId, Type, Quality, Price, Seller) |
   {
-    -confirmationPending(ProductId, Type, Price, Seller);
+    -confirmationPending(ProductId, Type, Quality, Price, Seller);
+    +waitingArrival(ProductId, Type, Quality, Price, Seller);
+  }
+
+  event(productTransfer(ProductId, Type, Quality), env) <- true | {
+    AddItem(ProductId, Type, Quality);
+    if (B(waitingArrival(ProductId, Type, ExpectedQuality, Price, Seller))) {
+      -waitingArrival(ProductId, Type, ExpectedQuality, Price, Seller);
+      % Do something if the Quality is worse than the ExpectedQuality
+      % Do something else if it's the same
+    }
   }
 
 %goals:
