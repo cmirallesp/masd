@@ -1,3 +1,12 @@
+beliefs:
+  mean(Seller,0) :-  not(review(Seller,_)),!.
+  mean(Seller,R) :- review(Seller,Lst), imean(Seller,Lst,0,0,R).
+  imean(_,[],Acum,N,R) :- is(R,Acum/N),!.
+  imean(Seller,[X|T],Acum,N,R) :- is(Acum2,Acum+X),
+                                  is(N2, N+1),
+                                  imean(Seller,T,Acum2,N2,R).
+
+
 beliefupdates:
   {not review(Seller,_)} 
     UpdateReview(Seller, Score) 
