@@ -151,7 +151,7 @@
 
 	marketplace.controller('agentsController', ['$scope', 'communications', function($scope, communications) {
 		$scope.selected = null
-
+        $scope.products = communications.products;
         $scope.reset = function() {
             $scope.moneyDiff = null;
 

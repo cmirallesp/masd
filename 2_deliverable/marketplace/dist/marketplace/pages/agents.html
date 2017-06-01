@@ -89,6 +89,18 @@
 			    </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">Products On Sale</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <span ng-repeat="product in products | filter: { owner: selected.name } : false"
+                              class="list-group-item">
+                            {{product.name}} ({{product.id}}): <strong>${{product.price}}</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
 		</div>
 	</div>
 </div>

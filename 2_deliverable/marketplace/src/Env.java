@@ -382,7 +382,9 @@ public class Env extends Environment {
     	receiver.setMoney(receiver.getMoney() + money.toInt());
     	APLFunction event = new APLFunction("moneyTransfer", money, concept);
     	throwEvent(event, receiver.getName());
-    	return null;
+        addLog(String.format("Ship money $%d (%s -> %s)", money.toInt(), agName, dst.toString()), agents.get(agName), null);
+
+        return null;
     }
     
     public Term shipProduct(String agName, APLIdent dst, APLNum product) throws ExternalActionFailedException {
@@ -397,6 +399,8 @@ public class Env extends Environment {
     	int notifiedQuality = bluffUncovered? prod.getRealQuality() : prod.getAnnouncedQuality();
     	APLFunction event = new APLFunction("productTransfer", product, new APLIdent(prod.getType()), new APLNum(notifiedQuality));
     	throwEvent(event, dst.toString());
+
+        addLog(String.format("Ship product %d (%s -> %s)", product.toInt(), agName, dst.toString()), agName, product.toInt());
     	return null;
     }
     
@@ -438,7 +442,7 @@ public class Env extends Environment {
         addLog(String.format("Update products %s (%d) [q=%d]",type,id, quality), agents.get(agName), null);
 
     }
-    
+
     public void updateMoney(String agName, int amount) {
         APLFunction event = new APLFunction("updateMoney", new APLNum(amount));
         // If we throw an event, we always need to throw an APLFunction.
