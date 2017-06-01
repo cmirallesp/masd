@@ -3,9 +3,22 @@ plans:
   @env(enterMarket(Role), _);
 
 beliefs:
+  % Product types
+  type(smartphone1).
+  type(smartphone2).
+  type(smartphone3).
+  type(smartwatch).
+  type(tablet).
+  type(console1).
+  type(console2).
+  type(console3).
+  type(console4).
   money(0).
+  recommendedPrice(Type, Qlty, Price):- type(Type), x(Type, X),
+                                        is(Price, int(X*(5.0+Qlty)/10.0)).
   % True with a certain probability. Useful to let some decisions to randomness.
   roll(Probability):- is(X, random(1)), X =< Probability.
+  enoughMoney(Price):- money(Money), Money >= Price.
   
 beliefupdates:
   % money: update money quantity

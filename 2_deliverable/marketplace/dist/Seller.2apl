@@ -1,36 +1,24 @@
+include: Common.2apl;
+
+beliefs:
+  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
+  retailPrice(Type, Quality, Price):- type(Type), stock(Type, Stock), c(C), lambda(Lambda),
+                                      recommendedPrice(Type, Quality, RPrice),
+                                      is(Price, RPrice + int(C*exp(-Lambda*Stock))).
+  stockUnderMinimum(ProdType):- type(ProdType), stock(ProdType, Stock),
+                                minimumStock(Minimum), Stock < Minimum.
+
 goals:
-  putOnSale(1,prod1,5). 
-  putOnSale(1,prod1,10).
-  retireFromSale(1,3).
-  retireFromSale(1,3), retireFromSale(1,14).
+  gainMoney.
 
 beliefupdates:
-  { Qty2 = 0, onSale(Id,Qty)  }   UpdateOnSale(Id,Qty2) { not onSale(Id,Qty) }
-  { Qty2 > 0, onSale(Id,Qty)   }  UpdateOnSale(Id,Qty2) { not onSale(Id,Qty), onSale(Id,Qty2) }
-  { Qty2 > 0, not onSale(Id,_) }  UpdateOnSale(Id,Qty2)  { onSale(Id,Qty2) }
-
+  { not(onSale(Id, _)), have(Id, _, _) } PutOnSale(Id, Price) { onSale(Id, Price) }
 
 pgrules:
-
-  putOnSale(Id,Desc,Qty) <- true | 
+  gainMoney <- have(Id, Type, Quality) and not(onSale(Id, _)) |
   {
-    @env( putOnSale(Id,Desc,Qty), Y );
-    B([_, Qty2] = Y);
-    UpdateOnSale(Id,Qty2);
-    dropgoal(putOnSale(Id,Desc,Qty));
+    B(retailPrice(Type, Quality, Price));
+    @env(putOnSale(Id, Quality, Price));
+    PutOnSale(Id, Price);
   }
 
-  retireFromSale(Id,Qty) <- onSale(Id,_) |
-  {
-    @env(retireFromSale(Id,Qty), Y );
-    B([_, Qty2] = Y);
-    UpdateOnSale(Id,Qty2);
-    dropgoal(retireFromSale(Id,Qty));
-  }
-
-prrules:
-  @env(retireFromSale(Id,Qty),Y); R; <- true | 
-  { 
-    UpdateOnSale(Id,0);
-    dropgoal(retireFromSale(Id,Qty)); 
-  }  

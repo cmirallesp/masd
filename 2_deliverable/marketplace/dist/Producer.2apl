@@ -1,61 +1,31 @@
-include: Common.2apl;
-%include: Seller.2apl;
+include: Seller.2apl;
 
 beliefs:
-  type(smartphone1, 70).
-  type(smartphone2, 50).
-  type(smartphone3, 60).
-  type(smartwatch, 20).
-  type(tablet, 70).
-  type(console1, 50).
-  type(console2, 70).
-  type(console3, 50).
-  type(console4, 60).
+  canProduce(ProdType):- type(ProdType), productionPrice(ProdType, Price), enoughMoney(Price).
+  minimumStock(3).
+  % Selling constants
+  c(100).
+  lambda(1).
+  x(Type, X):- type(Type), productionPrice(Type, ProductionPrice), is(X, int(1.2*ProductionPrice)).
+  % Production prices
+  productionPrice(smartphone1, 70).
+  productionPrice(smartphone1, 50).
+  productionPrice(smartphone1, 60).
+  productionPrice(tablet, 70).
+  productionPrice(console1, 50).
+  productionPrice(console2, 70).
+  productionPrice(console3, 50).
+  productionPrice(console4, 60).
   
   role(producer).
-  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
-
-%beliefs:
-  %% price of production of each type of products
-  %prices([
-    %[prod1,10],
-    %[prod2,15],
-    %[prod3,5]]).
-
-  %money(10).
-  %% do we have enough money for producing product ProdId
-  %enoughMoney(ProdId) :- prices(Prices), iEnoughMoney(ProdId,Prices).
-  %iEnoughMoney(_,[],_) :- fail.
-  %iEnoughMoney(ProdId,[[ProdId,Price] | _]) :- money(M),
-                                              %M >= Price,!.
-  %iEnoughMoney(ProdId,[_|Tail]) :- iEnoughMoney(ProdId, Tail).
-  
-  %% Gets the actual price of product ProdId in Price
-  %priceProduct(ProdId,Price) :- prices(Lst), iPriceProduct(ProdId,Lst,Price).
-  %iPriceProduct(_,[],_) :- fail.
-  %iPriceProduct(ProdId, [[ProdId,Price]|_], Price) :- !.
-  %iPriceProduct(ProdId,[_ | Tail], Price) :- iPriceProduct(ProdId,Tail,Price).
-
-plans:
-  %produce(smartwatch);
 
 goals:
   maintainStock.
-  gainMoney.
 
 pgrules:
-  gainMoney <- type(Type, ProductionPrice) and have(Idx, Type, Quality) and not(onSale(Idx, _)) |
+  maintainStock <- canProduce(ProdType) and stockUnderMinimum(ProdType) |
   {
-    B(is(SellPrice, int(1.2*ProductionPrice)));
-    @env(putOnSale(Idx, Quality, SellPrice));
-    +onSale(Idx, SellPrice);
-  }
-
-  maintainStock <- type(ProdType, ProductionPrice) and stock(ProdType, Stock) and Stock < 3 |
-  {
-    @env(produceProduct(ProdType), Product);
-    B(Product = [ProdId, ProdType, Quality]);
-    AddItem(ProdId, ProdType, Quality);
+    produce(ProdType);
   }
 
 pcrules:
@@ -64,11 +34,5 @@ pcrules:
     @env(produceProduct(ProdType), Product);
     B(Product = [ProdId, ProdType, Quality]);
     AddItem(ProdId, ProdType, Quality);
-    %if B([ProdId,QualityAct]=Y) then {  
-      %+product(ProdId,QualityCla,QualityAct);
-      %if B(priceProduct(ProdId,Price) and money(M)) then{
-        %UpdateMoney(M-Price);
-      %}
-    %}
   }
 
