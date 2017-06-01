@@ -1,9 +1,7 @@
+import apapl.APLMAS;
 import apapl.Environment;
 import apapl.ExternalActionFailedException;
-import apapl.data.APLFunction;
-import apapl.data.APLIdent;
-import apapl.data.APLNum;
-import apapl.data.Term;
+import apapl.data.*;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -25,8 +23,6 @@ import com.google.gson.JsonArray;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
-
-import apapl.data.APLList;
 
 /**
  * === About this file
@@ -115,9 +111,6 @@ public class Env extends Environment {
         } else {
             BASE_PATH = baseFile.getPath();
         }
-
-        // TODO: REMOVE
-        // BASE_PATH="/home/salva/Projects/mai-masd/2_deliverable/marketplace/dist";
 
         System.out.println("Base Path: " + BASE_PATH);
 
@@ -280,7 +273,6 @@ public class Env extends Environment {
      *
      * @param agName The name of the agent that does the external action
      * @param idProd product identifier
-     * @param desc   product type
      * @param price  Sale price decided by the agent.
      * @return The idProd and qty in a APLList
      */
@@ -348,7 +340,7 @@ public class Env extends Environment {
     public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
     	Agent agent = agents.get(agName);
     	String allowedSellerRole = agent.getRole().equals("store")? "producer" : "store";
-        addLog("Search Product %s " + prodDesc.toString(), agent, null);
+        addLog(String.format("Search Product %s",prodDesc.toString()), agent, null);
         LinkedList<Term> foundProducts = new LinkedList<>();
         for (Product product : products.values()) {
         	Agent seller = agents.get(product.getOwner());
@@ -405,7 +397,9 @@ public class Env extends Environment {
     	receiver.setMoney(receiver.getMoney() + money.toInt());
     	APLFunction event = new APLFunction("moneyTransfer", money, concept);
     	throwEvent(event, receiver.getName());
-    	return null;
+        addLog(String.format("Ship money $%d (%s -> %s)", money.toInt(), agName, dst.toString()), agents.get(agName), null);
+
+        return null;
     }
     
     public Term shipProduct(String agName, APLIdent dst, APLNum product) throws ExternalActionFailedException {
@@ -420,6 +414,8 @@ public class Env extends Environment {
     	int notifiedQuality = bluffUncovered? prod.getRealQuality() : prod.getAnnouncedQuality();
     	APLFunction event = new APLFunction("productTransfer", product, new APLIdent(prod.getType()), new APLNum(notifiedQuality));
     	throwEvent(event, dst.toString());
+
+        addLog(String.format("Ship product %d (%s -> %s)", product.toInt(), agName, dst.toString()), agName, product.toInt());
     	return null;
     }
     
@@ -441,6 +437,25 @@ public class Env extends Environment {
     	agents.put(agName, agent);
     	updateMoney(agName, agent.getMoney());
     	return null;
+    }
+
+    public void updateNeeds(String agName, String productType, int minQuality) {
+        APLFunction event = new APLFunction("updateNeeds", new APLIdent(productType), new APLNum(minQuality));
+        // If we throw an event, we always need to throw an APLFunction.
+        throwEvent(event, agName);
+        addLog("Update needs "+productType, agents.get(agName), null);
+    }
+
+    public void updateNeeds(String agName, String productType) {
+        this.updateNeeds(agName, productType, 0);
+    }
+
+    public void updateItems(String agName, int id, String type, int quality) {
+        APLFunction event = new APLFunction("updateItems", new APLNum(id), new APLIdent(type), new APLNum(quality));
+        // If we throw an event, we always need to throw an APLFunction.
+        throwEvent(event, agName);
+        addLog(String.format("Update products %s (%d) [q=%d]",type,id, quality), agents.get(agName), null);
+
     }
 
     public void updateMoney(String agName, int amount) {
@@ -542,9 +557,6 @@ public class Env extends Environment {
 
     public void runServer() throws IOException {
 
-        // TODO: Remove this placeholder
-        // addPlaceholder();
-
         int port = 9000;
         server = HttpServer.create(new InetSocketAddress(port), 0);
         System.out.println("server started at " + port);
@@ -642,6 +654,38 @@ public class Env extends Environment {
                             // Parameters are needed
                             code = 500;
                             response = "{\"error\":true, \"message\": \"Invalid request, 'agent' and 'amount' should be specified\"}";
+                            break;
+                        }
+                    case "/update-necessity":
+                        // Updates the money of an agent
+                        if (parameters.containsKey("agent") && parameters.containsKey("type")) {
+                            int minQuality = 0;
+                            // Everything is ok, send the event
+                            if (parameters.containsKey("quality")) {
+                                minQuality = Integer.parseInt(parameters.get("quality").toString());
+                            }
+                            Env.this.updateNeeds(parameters.get("agent").toString(), parameters.get("type").toString(), minQuality);
+                        } else {
+                            // Parameters are needed
+                            code = 500;
+                            response = "{\"error\":true, \"message\": \"Invalid request, 'agent' and 'type' should be specified\"}";
+                            break;
+                        }
+                    case "/update-item":
+                        // Updates the money of an agent
+                        if (parameters.containsKey("agent") &&
+                                parameters.containsKey("id") &&
+                                parameters.containsKey("type") &&
+                                parameters.containsKey("quality") ) {
+                            // Everything is ok, send the event
+                            Env.this.updateItems(parameters.get("agent").toString(),
+                                    Integer.parseInt(parameters.get("id").toString()),
+                                    parameters.get("type").toString(),
+                                    Integer.parseInt(parameters.get("quality").toString()));
+                        } else {
+                            // Parameters are needed
+                            code = 500;
+                            response = "{\"error\":true, \"message\": \"Invalid request, 'agent', 'id', 'quality' and 'type' should be specified\"}";
                             break;
                         }
                     case "/onsale":
