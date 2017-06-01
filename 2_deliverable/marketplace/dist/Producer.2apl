@@ -29,7 +29,7 @@ pgrules:
   }
 
 pcrules:
-  produce(ProdType) <- true | % enoughMoney(ProdType) |
+  produce(ProdType) <- canProduce(ProdType) |
   {
     @env(produceProduct(ProdType), Product);
     B(Product = [ProdId, ProdType, Quality]);

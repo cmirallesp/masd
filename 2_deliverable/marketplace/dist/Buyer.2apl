@@ -1,79 +1,108 @@
-goals:
-  searchProduct(prod1).
-  searchProduct(prod2).
-  sendReview(prod1, 10). 
-  sendReview(prod1, 12). 
-  sendReview(prod2, 12). 
+include: Common.2apl;
 
-  getReviews(prod1).
-  getReviews(prod2).
-  
+beliefs:
+  role(enduser).
 
-beliefupdates:
-  % update searchedTimes first time
-  {not searchedTimes(Desc,_)} 
-    UpdateSearchedTimes(Desc) 
-  {searchedTimes(Desc,1)}
-
-  % updated searchedTimes
-  {searchedTimes(Desc,N)} 
-    UpdateSearchedTimes(Desc) 
-  { not searchedTimes(Desc,N), searchedTimes(Desc,N+1) }
-  
-  % update productFounds first time
-  {not productFounds(Id,_,_), searchedTimes(Desc,N)} 
-    UpdateFounds(Id,Desc,Qty) 
-  {productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
-
-  % update productFounds 
-  {productFounds(Id,_,OldQty), searchedTimes(Desc,N)} 
-    UpdateFounds(Id,Desc,Qty) 
-  {not productFounds(Id,_,OldQty), productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
-
-  % update reviews first time
-  {not reviews(Product, ListOfReviews)}
-    UpdateReviews(Product, ListOfReviews)
-  { reviews(Product, ListOfReviews)}
-
-  % update reviews 
-  { reviews(Product, ListOfReviews)}
-    UpdateReviews(Product, NewListOfReviews)
-  { not reviews(Product, ListOfReviews), reviews(Product, NewListOfReviews) }
-
-pgrules:
-  searchProduct(Desc) <- true | 
+pcrules:
+  initBuyProtocol(ProductId, Type, Price, Seller) <-
+    not(confirmationPending(ProductId, _, _, _)) and
+    enoughMoney(Price) |
   {
-    @env(searchProduct(Desc), Y );
-
-    if B([Id,Desc, Qty] = Y) then
-    {
-      UpdateFounds(Id,Desc,Qty);
-      dropgoal(searchProduct(Desc));
-    }
-    else{
-      UpdateSearchedTimes(Desc);
-      if B(searchedTimes(Desc,10)){
-        -searchedTimes(Desc,10);
-        dropgoal(searchProduct(Desc));
-      }
-    }
+    send(Seller, request, wantToBuy(ProductId));
+    % UpdateMoney belief so we do not count on having more money than what we
+    % actually have for future transactions.
+    +confirmationPending(ProductId, Type, Price, Seller);
   }
 
-  sendReview(Prod,Score) <- true |
-  { % request to the reviewer a new review
-    send(reviewer, inform, addReview(Prod, Score));
-    dropgoal(sendReview(Prod, Score));
+  message(Seller, inform, _, _, buyAccepted(ProductId)) <-
+    confirmationPending(ProductId, Type, Price, Seller) |
+  {
+    -confirmationPending(ProductId, Type, Price, Seller);
+    % Perform money transfer...
   }
 
-  getReviews(Product) <- true |
-  { 
-    send(reviewer, request, getReviews(Product));
-    dropgoal(getReviews(Product));
+  message(Seller, refuse, _, _, buyRefused(ProductId)) <-
+    confirmationPending(ProductId, Type, Price, Seller) |
+  {
+    -confirmationPending(ProductId, Type, Price, Seller);
   }
+
+%goals:
+  %searchProduct(prod1).
+  %searchProduct(prod2).
+  %sendReview(prod1, 10). 
+  %sendReview(prod1, 12). 
+  %sendReview(prod2, 12). 
+
+  %getReviews(prod1).
+  %getReviews(prod2).
+  
+
+%beliefupdates:
+  %% update searchedTimes first time
+  %{not searchedTimes(Desc,_)} 
+    %UpdateSearchedTimes(Desc) 
+  %{searchedTimes(Desc,1)}
+
+  %% updated searchedTimes
+  %{searchedTimes(Desc,N)} 
+    %UpdateSearchedTimes(Desc) 
+  %{ not searchedTimes(Desc,N), searchedTimes(Desc,N+1) }
+  
+  %% update productFounds first time
+  %{not productFounds(Id,_,_), searchedTimes(Desc,N)} 
+    %UpdateFounds(Id,Desc,Qty) 
+  %{productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
+
+  %% update productFounds 
+  %{productFounds(Id,_,OldQty), searchedTimes(Desc,N)} 
+    %UpdateFounds(Id,Desc,Qty) 
+  %{not productFounds(Id,_,OldQty), productFounds(Id,Desc,Qty), not searchedTimes(Desc,N)}
+
+  %% update reviews first time
+  %{not reviews(Product, ListOfReviews)}
+    %UpdateReviews(Product, ListOfReviews)
+  %{ reviews(Product, ListOfReviews)}
+
+  %% update reviews 
+  %{ reviews(Product, ListOfReviews)}
+    %UpdateReviews(Product, NewListOfReviews)
+  %{ not reviews(Product, ListOfReviews), reviews(Product, NewListOfReviews) }
+
+%pgrules:
+  %searchProduct(Desc) <- true | 
+  %{
+    %@env(searchProduct(Desc), Y );
+
+    %if B([Id,Desc, Qty] = Y) then
+    %{
+      %UpdateFounds(Id,Desc,Qty);
+      %dropgoal(searchProduct(Desc));
+    %}
+    %else{
+      %UpdateSearchedTimes(Desc);
+      %if B(searchedTimes(Desc,10)){
+        %-searchedTimes(Desc,10);
+        %dropgoal(searchProduct(Desc));
+      %}
+    %}
+  %}
+
+  %sendReview(Prod,Score) <- true |
+  %{ % request to the reviewer a new review
+    %send(reviewer, inform, addReview(Prod, Score));
+    %dropgoal(sendReview(Prod, Score));
+  %}
+
+  %getReviews(Product) <- true |
+  %{ 
+    %send(reviewer, request, getReviews(Product));
+    %dropgoal(getReviews(Product));
+  %}
 
  
-pcrules:
-  message(ReputationManager, inform, _, _, reviewsAnswer(Product, ListOfReviews) ) <- true |
-  {
-    UpdateReviews(Product,ListOfReviews);
-  }
+%pcrules:
+  %message(ReputationManager, inform, _, _, reviewsAnswer(Product, ListOfReviews) ) <- true |
+  %{
+    %UpdateReviews(Product,ListOfReviews);
+  %}

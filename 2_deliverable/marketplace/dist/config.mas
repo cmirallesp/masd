@@ -3,6 +3,7 @@
 
   <!--<agent name="common" file="Common.2apl"/>-->
   <agent name="producer" file="Producer.2apl"/>
+  <agent name="buyer" file="Buyer.2apl"/>
 
   <!--<agent name="reviewer" file="ReputationManager.2apl"/>-->
 
