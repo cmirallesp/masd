@@ -24,10 +24,16 @@ pgrules:
     initBuyProtocol(ProductId, Type, Quality, Price, Seller);
   }
 
-  sendReview(Prod,Score) <- true |
+  sendReview(Seller,Score) <- true |
   { % request to the reviewer a new review
-    send(reviewer, inform, addReview(Prod, Score));
-    dropgoal(sendReview(Prod, Score));
+    send(reviewer, inform, addReview(Seller, Score));
+    dropgoal(sendReview(Seller, Score));
+  }
+
+  getReviews(Seller) <- true |
+  { 
+    send(reviewer, request, getReviews(Seller));
+    dropgoal(getReviews(Seller));
   }
 
 pcrules:
@@ -64,8 +70,8 @@ pcrules:
       % Do something if the Quality is worse than the ExpectedQuality
       % Do something else if it's the same
       -buyProtocolOn(Type);
-      B(is(Quality2,5));
-      B(is(P_realised,abs(Quality2-ExpectedQuality )/10));
+
+      B(is(P_realised,abs(Quality-ExpectedQuality )/10));
       if(B( roll(P_realised))){
         % realised that Quality is worse than the ExpectedQuality
         B(is(Score, random(4.0)));
@@ -76,7 +82,13 @@ pcrules:
         B(is(Score, (5+random(5.0))));
         adoptz(sendReview(Seller,Score));
       }
+      adoptz(getReviews(Seller));
     }
+  }
+
+  message(ReputationManager, inform, _, _, reviewsAnswer(Seller, Mean) ) <- true |
+  {
+    +review(Seller,Mean);
   }
 
 
@@ -147,11 +159,6 @@ prrules:
     %}
   %}
 
-  %getReviews(Product) <- true |
-  %{ 
-    %send(reviewer, request, getReviews(Product));
-    %dropgoal(getReviews(Product));
-  %}
 
  
 %pcrules:
