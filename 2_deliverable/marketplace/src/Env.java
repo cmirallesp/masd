@@ -325,7 +325,7 @@ public class Env extends Environment {
     public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
     	Agent agent = agents.get(agName);
     	String allowedSellerRole = agent.getRole().equals("store")? "producer" : "store";
-        addLog("Search Product %s " + prodDesc.toString(), agent, null);
+        addLog(String.format("Search Product %s",prodDesc.toString()), agent, null);
         LinkedList<Term> foundProducts = new LinkedList<>();
         for (Product product : products.values()) {
         	Agent seller = agents.get(product.getOwner());
@@ -421,7 +421,7 @@ public class Env extends Environment {
     }
 
     public void updateNeeds(String agName, String productType, int minQuality) {
-        APLFunction event = new APLFunction("updateNeeds", new APLVar(productType), new APLNum(minQuality));
+        APLFunction event = new APLFunction("updateNeeds", new APLIdent(productType), new APLNum(minQuality));
         // If we throw an event, we always need to throw an APLFunction.
         throwEvent(event, agName);
         addLog("Update needs "+productType, agents.get(agName), null);
@@ -432,13 +432,13 @@ public class Env extends Environment {
     }
 
     public void updateItems(String agName, int id, String type, int quality) {
-        APLFunction event = new APLFunction("updateItems", new APLNum(id), new APLVar(type), new APLNum(quality));
+        APLFunction event = new APLFunction("updateItems", new APLNum(id), new APLIdent(type), new APLNum(quality));
         // If we throw an event, we always need to throw an APLFunction.
         throwEvent(event, agName);
         addLog(String.format("Update products %s (%d) [q=%d]",type,id, quality), agents.get(agName), null);
 
     }
-
+    
     public void updateMoney(String agName, int amount) {
         APLFunction event = new APLFunction("updateMoney", new APLNum(amount));
         // If we throw an event, we always need to throw an APLFunction.
