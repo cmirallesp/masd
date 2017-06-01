@@ -12,4 +12,12 @@ beliefupdates:
   { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty) }
   { not(have(ProductId, _, _)) } AddItem(ProductId, Type, Quality) {have(ProductId, Type, Quality)}
 
+pcrules:
+  event(name(Name), env) <- true | {
+    +name(Name);
+  }
+
+  event(updateMoney(Qty), env) <- true | {
+    UpdateMoney(Qty);
+  }
 

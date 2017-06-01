@@ -10,6 +10,7 @@ class Product extends Logger {
     String desc = "unknown";
     String image;
     int qty;
+    boolean onSale = false;
 
     int msrp = 10; // Manufacturer recommended retail price
     int price = 10; // Price on sale
@@ -17,7 +18,7 @@ class Product extends Logger {
     int quality = 5;
     int realQuality = 3;
 
-    String seller = "unknown";
+    String owner = "unknown";
     String fullDescription = "Description is not available";
 
     // In order to do computations more efficiently in the front
@@ -42,8 +43,24 @@ class Product extends Logger {
     String getType() {
         return desc;
     }
+    
+    public int getAnnouncedQuality() {
+		return quality;
+	}
 
-    void setProductType(String _desc) {
+	public void setAnnouncedQuality(int quality) {
+		this.quality = quality;
+	}
+
+	public int getRealQuality() {
+		return realQuality;
+	}
+
+	public void setRealQuality(int realQuality) {
+		this.realQuality = realQuality;
+	}
+
+	void setProductType(String _desc) {
         desc = _desc;
         // Assign an image
         image = Env.getImage(_desc);
@@ -62,6 +79,14 @@ class Product extends Logger {
 		return price;
 	}
 
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
 	public void setPrice(int price) {
 		this.price = price;
 	}
@@ -69,6 +94,14 @@ class Product extends Logger {
 	int getId() {
         return id;
     }
+	
+	public void setOnSale(boolean onSale) {
+		this.onSale = onSale;
+	}
+	
+	public boolean isOnSale() {
+		return onSale;
+	}
 
     /**
      * Updates the lastModified field to current timestamp
@@ -96,7 +129,7 @@ class Product extends Logger {
         obj.addProperty("name", desc);
         obj.addProperty("description", fullDescription);
         obj.addProperty("quantity", qty);
-        obj.addProperty("seller", seller);
+        obj.addProperty("owner", owner);
 
         obj.addProperty("quality", quality);
         obj.addProperty("real_quality", realQuality);

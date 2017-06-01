@@ -70,17 +70,17 @@ public class Env extends Environment {
     private final Random qualGenerator = new Random();
 
     // All loggers
-    private Map<String, ProductTypePrices> productPrices = new HashMap<>();
+    private Map<String, Integer> productionPrices = new HashMap<>();
     {
-    	productPrices.put("smartphone1", new ProductTypePrices(70, 600));
-    	productPrices.put("smartphone2", new ProductTypePrices(50, 300));
-    	productPrices.put("smartphone3", new ProductTypePrices(60, 400));
-    	productPrices.put("smartwatch", new ProductTypePrices(20, 100));
-    	productPrices.put("tablet", new ProductTypePrices(70, 400));
-    	productPrices.put("console1", new ProductTypePrices(50, 200));
-    	productPrices.put("console2", new ProductTypePrices(70, 300));
-    	productPrices.put("console3", new ProductTypePrices(50, 150));
-    	productPrices.put("console4", new ProductTypePrices(60, 200));
+    	productionPrices.put("smartphone1", 70);
+    	productionPrices.put("smartphone2", 50);
+    	productionPrices.put("smartphone3", 60);
+    	productionPrices.put("smartwatch", 20);
+    	productionPrices.put("tablet", 70);
+    	productionPrices.put("console1", 50);
+    	productionPrices.put("console2", 70);
+    	productionPrices.put("console3", 50);
+    	productionPrices.put("console4", 60);
     }
     private Map<Integer, Product> products = new HashMap<>();
     private Map<String, Agent> agents = new HashMap<>();
@@ -164,26 +164,28 @@ public class Env extends Environment {
     public JsonArray getOnSale() {
         JsonArray arr = new JsonArray();
         for (Product product : products.values()) {
-            arr.add(product.toJSON());
+        	if (product.isOnSale()) {
+        		arr.add(product.toJSON());
+        	}
         }
         return arr;
     }
 
     private void addLog(String message, String agentName, int productId) {
-        Agent agent = getAgent(agentName);
+        Agent agent = agents.get(agentName);
         Product product = this.products.get(productId);
         this.addLog(message, agent, product);
     }
 
-    private Agent getAgent(String name) {
-        if (agents.containsKey(name)) {
-            return agents.get(name);
-        } else {
-            Agent agent = new Agent(name);
-            agents.put(name, agent);
-            return agent;
-        }
-    }
+//    private Agent getAgent(String name) {
+//        if (agents.containsKey(name)) {
+//            return agents.get(name);
+//        } else {
+//            Agent agent = new Agent(name);
+//            agents.put(name, agent);
+//            return agent;
+//        }
+//    }
 
     private void addLog(String message, Agent agent, Product product) {
         EventLog event = new EventLog(message, agent, product);
@@ -225,7 +227,7 @@ public class Env extends Environment {
         // If we throw an event, we always need to throw an APLFunction.
         throwEvent(event, agName);
 
-        addLog("Agent registered to environment", getAgent(agName), null);
+//        addLog("Agent registered to environment", agents.get(agName), null);
 
         // note: we can also throw an event to all agents by letting out the last parameter:
         // throwEvent(event);
@@ -241,21 +243,21 @@ public class Env extends Environment {
         }
     }
 
-    private Product updateOnSale(String agName, int idProd, int qty)  throws ExternalActionFailedException {
-        Product product = products.get(idProd);
-        if (product == null) {
-            if (qty < 0) {
-                throw new ExternalActionFailedException(
-                        String.format("Product %s not in product list", idProd));
-            }
-            product = new Product(idProd, qty);
-            product.seller = agName;
-            products.put(idProd, product);
-        } else {
-            product.updateQuantity(qty);
-        }
-        return product;
-    }
+//    private Product updateOnSale(String agName, int idProd, int qty)  throws ExternalActionFailedException {
+//        Product product = products.get(idProd);
+//        if (product == null) {
+//            if (qty < 0) {
+//                throw new ExternalActionFailedException(
+//                        String.format("Product %s not in product list", idProd));
+//            }
+//            product = new Product(idProd, qty);
+//            product.owner = agName;
+//            products.put(idProd, product);
+//        } else {
+//            product.updateQuantity(qty);
+//        }
+//        return product;
+//    }
 
     /**
      * This method can be called by a 2APL agents as follows: @env(putOnSale(id,"my product",2), X).
@@ -263,25 +265,32 @@ public class Env extends Environment {
      *
      * @param agName The name of the agent that does the external action
      * @param idProd product identifier
-     * @param desc   product description
-     * @param qty    quantity
+     * @param desc   product type
+     * @param price  Sale price decided by the agent.
      * @return The idProd and qty in a APLList
      */
-    public Term putOnSale(String agName, APLNum idProd, APLIdent desc, APLNum qty) throws ExternalActionFailedException {
-
-        Product product = this.updateOnSale(agName, idProd.toInt(), qty.toInt());
-        product.setProductType(desc.toString());
-
-        this.addLog(String.format("Put on '%s' on sale (%s)", desc, qty), agName, idProd.toInt());
-
-        try {
-            return new APLList(idProd, new APLNum(product.qty));
-        } catch (Exception e) {
-            //exception handling
-            System.err.println(String.format(
-                    "env> %s putOnSale(%s,..) failed: %s ", agName, idProd, e.getMessage()));
-            return null;
-        }
+    public Term putOnSale(String agName, APLNum idProd, APLNum announcedQuality, APLNum price) throws ExternalActionFailedException {
+    	
+    	if (!products.containsKey(idProd.toInt())) {
+    		String msg = "There is not any product with id " + idProd;
+    		this.addLog(msg, agents.get(agName), null);
+    		throw new ExternalActionFailedException(msg);
+    	}
+    	
+    	Product product = products.get(idProd.toInt());
+    	
+    	if (!product.getOwner().equals(agName)) {
+    		String msg = "Product " + idProd + " belongs to agent " + product.getOwner();
+    		this.addLog(msg, agents.get(agName), product);
+    		throw new ExternalActionFailedException(msg);
+    	}
+    	
+    	product.setAnnouncedQuality(announcedQuality.toInt());
+    	product.setOnSale(true);
+    	product.setPrice(price.toInt());
+    	
+    	this.addLog("Product " + idProd + " is now for sale", agName, product.getId());
+    	return null;
     }
 
     /**
@@ -290,59 +299,72 @@ public class Env extends Environment {
      *
      * @param agName The name of the agent that does the external action
      * @param idProd product identifier
-     * @param qty    quantity to be retired
      * @return The id and qty in a APLList
      */
-    public Term retireFromSale(String agName, APLNum idProd, APLNum qty) throws ExternalActionFailedException {
-
-        Product product = updateOnSale(agName, idProd.toInt(), -qty.toInt());
-
-        this.addLog(String.format("Retire '%s' from sale (%s)", product.getType(), qty), agName, idProd.toInt());
-
-        try {
-            return new APLList(idProd, new APLNum(product.qty));
-        } catch (Exception e) {
-            //exception handling
-            System.err.println(String.format(
-                    "env> %s retireFromSale(%s,..) failed: %s ", agName, idProd, e.getMessage()));
-            return null;
-        }
+    public Term retireFromSale(String agName, APLNum idProd) throws ExternalActionFailedException {
+    	if (!products.containsKey(idProd.toInt())) {
+    		String msg = "There is not any product with id " + idProd;
+    		this.addLog(msg, agents.get(agName), null);
+    		throw new ExternalActionFailedException(msg);
+    	}
+    	
+    	Product product = products.get(idProd.toInt());
+    	
+    	if (!product.getOwner().equals(agName)) {
+    		String msg = "Product " + idProd + " does not belong to agent " + agName;
+    		this.addLog(msg, agents.get(agName), product);
+    		throw new ExternalActionFailedException(msg);
+    	}
+    	
+    	if (!product.isOnSale()) {
+    		String msg = "Product is " + idProd + " is not for sale";
+    		this.addLog(msg, agents.get(agName), product);
+    		throw new ExternalActionFailedException(msg);
+    	}
+    	
+    	product.setOnSale(false);
+    	
+    	this.addLog("Product " + idProd + " is no longer for sale", agName, product.getId());
+    	return null;
     }
 
     //exact search for the moment (fuzzy?)
     public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
-        addLog(String.format("Search Product %", prodDesc.toString()), getAgent(agName), null);
-        Product product = null;
-        boolean found = false;
-        for (Object o : products.values()) {
-            product = ((Product) o);
-            if (product.desc.equals(prodDesc.toString())) {
-                found = true;
-                break;
-            }
+    	Agent agent = agents.get(agName);
+    	String allowedSellerRole = agent.getRole().equals("store")? "producer" : "store";
+        addLog(String.format("Search Product %", prodDesc.toString()), agents.get(agName), null);
+        Product found = null;
+        for (Product product : products.values()) {
+        	Agent seller = agents.get(product.getOwner());
+        	if (product.isOnSale() && product.getType().equals(prodDesc.toString()) && 
+        			seller.getRole().equals(allowedSellerRole)) {
+        		found = product;
+        		break;
+        	}
         }
 
-        if (found) {
+        if (found != null) {
             return new APLList(
-                    new APLNum(product.id),
-                    new APLIdent(product.desc),
-                    new APLNum(product.qty));
+                    new APLNum(found.getId()),
+                    new APLIdent(found.getType()),
+                    new APLNum(found.getAnnouncedQuality()));
         } else {
             return new APLList();
         }
     }
 
     public Term produceProduct(String agName, APLIdent prodType) throws ExternalActionFailedException {
-    	if (productPrices.containsKey(prodType.toString())) {
-    		ProductTypePrices prices = productPrices.get(prodType.toString());
+    	if (productionPrices.containsKey(prodType.toString())) {
+    		Integer price = productionPrices.get(prodType.toString());
     		Agent agent = agents.get(agName);
-    		if (agent.getMoney() >= prices.getProductionPrice()) {
+    		if (price != null && agent.getMoney() >= price) {
     			int id = this.getUniqueId();
     			int quality = this.qualGenerator.nextInt(11);
     			Product product = new Product(id, prodType.toString(), 1);
-    			product.setMsrp(prices.getRecommendedPrice(quality));
+    			product.setRealQuality(quality);
+    			product.setOwner(agName);
     			products.put(id, product);
-                agent.setMoney(agent.getMoney() - prices.getProductionPrice());
+                agent.setMoney(agent.getMoney() - price);
                 // Even if the agent updates its belief after executing this action, fire an UpdateMoney
                 // event just in case
                 updateMoney(agName, agent.getMoney());
@@ -362,7 +384,7 @@ public class Env extends Environment {
     }
     
     public Term enterMarket(String agName, APLIdent role) throws ExternalActionFailedException {
-    	Agent agent = new Agent(agName);
+    	Agent agent = new Agent(agName, role.toString());
     	switch (role.toString()) {
     	case "producer":
     		agent.setMoney(300);
@@ -385,7 +407,7 @@ public class Env extends Environment {
         APLFunction event = new APLFunction("updateMoney", new APLNum(amount));
         // If we throw an event, we always need to throw an APLFunction.
         throwEvent(event, agName);
-        addLog(String.format("Update money $%d", amount), getAgent(agName), null);
+        addLog(String.format("Update money $%d", amount), agents.get(agName), null);
     }
 
     private static class HttpGetHandler implements HttpHandler {
@@ -461,21 +483,21 @@ public class Env extends Environment {
         }
     }
 
-    private void addPlaceholder() {
-        Agent agent1 = getAgent("seller1");
-        Agent agent2 = getAgent("seller2");
-        Agent agent3 = getAgent("seller3");
-        try {
-            putOnSale(agent1.name, new APLNum(100001), new APLIdent("prod1"), new APLNum(1));
-            putOnSale(agent1.name, new APLNum(100002), new APLIdent("prod2"), new APLNum(1));
-            putOnSale(agent2.name, new APLNum(100003), new APLIdent("prod1"), new APLNum(1));
-            putOnSale(agent3.name, new APLNum(100004), new APLIdent("prod1"), new APLNum(1));
-            putOnSale(agent3.name, new APLNum(100005), new APLIdent("prod3"), new APLNum(1));
-            putOnSale(agent3.name, new APLNum(100006), new APLIdent("prod4"), new APLNum(3));
-        } catch (ExternalActionFailedException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void addPlaceholder() {
+//        Agent agent1 = getAgent("seller1");
+//        Agent agent2 = getAgent("seller2");
+//        Agent agent3 = getAgent("seller3");
+//        try {
+//            putOnSale(agent1.name, new APLNum(100001), new APLIdent("prod1"), new APLNum(1));
+//            putOnSale(agent1.name, new APLNum(100002), new APLIdent("prod2"), new APLNum(1));
+//            putOnSale(agent2.name, new APLNum(100003), new APLIdent("prod1"), new APLNum(1));
+//            putOnSale(agent3.name, new APLNum(100004), new APLIdent("prod1"), new APLNum(1));
+//            putOnSale(agent3.name, new APLNum(100005), new APLIdent("prod3"), new APLNum(1));
+//            putOnSale(agent3.name, new APLNum(100006), new APLIdent("prod4"), new APLNum(3));
+//        } catch (ExternalActionFailedException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void runServer() throws IOException {
 
