@@ -28,11 +28,6 @@ pgrules:
     dropgoal(retireFromSale(Id,Qty));
   }
 
-pcrules:
-  event(name(Name), env) <- true | {
-    +name(Name);
-  }
-
 prrules:
   @env(retireFromSale(Id,Qty),Y); R; <- true | 
   { 

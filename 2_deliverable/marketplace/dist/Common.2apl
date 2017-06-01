@@ -1,0 +1,15 @@
+plans:
+  B(role(Role));
+  @env(enterMarket(Role), _);
+
+beliefs:
+  money(0).
+  % True with a certain probability. Useful to let some decisions to randomness.
+  roll(Probability):- is(X, random(1)), X =< Probability.
+  
+beliefupdates:
+  % money: update money quantity
+  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty) }
+  { not(have(ProductId, _, _)) } AddItem(ProductId, Type, Quality) {have(ProductId, Type, Quality)}
+
+
