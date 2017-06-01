@@ -1,10 +1,8 @@
 include: Buyer.2apl;
+include: Common.2apl;
+
 
 beliefupdates:
-  % money: update money quantity
-  { not money(_)  } UpdateMoney(Qty) { money(Qty)}
-  { money(OldQty) } UpdateMoney(Qty) { not money(OldQty), money(Qty)}
-
   % needs: add a certain need
   {not searchProduct(type)} UpdateNeeds(type) {searchProduct(type)}
 
@@ -12,14 +10,13 @@ beliefupdates:
   {not have(id,type,quality)} UpdateItems(id,type,quality) {have(id,type,quality)}
   {have(id,type,quality)} UpdateItems(id,type,quality) {not have(id,type,quality)}
 
+
 pcrules:
-  event(updateMoney(Qty), env) <- true | {
-  UpdateMoney(Qty);
-  }
 
   event(updateNeeds(type), env) <- true | {
   UpdateNeeds(type);
   }
+
 
   event(updateItems(id,type,quality), env) <- true | {
   UpdateItems(id,type,quality);

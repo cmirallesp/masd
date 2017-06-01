@@ -1,0 +1,48 @@
+
+<!-- Page Content -->
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-md-3">
+            <div class="row">
+                <p class="lead">Categories:</p>
+                <div class="list-group">
+                    <a ng-repeat="type in types"
+                       ng-click="setProductFilter(type.filter)" ng-class="{'active': type.filter==filter}"
+                       class="list-group-item">{{type.name}} <span class="badge">{{type.count}}</span> </a>
+                </div>
+            </div>
+
+		</div>
+		<div class="col-md-9">
+			<div class="row">
+				<div ng-repeat="product in products | filter: {name: filter} : false" class="col-sm-6 col-lg-4 col-md-6">
+					<div class="thumbnail" style="padding:10px;">
+						<img ng-src="{{product.image}}" alt="Product Image">
+						<div class="caption">
+							<h4 class="pull-right">${{product.price}}</h4>
+							<h4> {{product.name}} ({{product.id}}) </h4>
+							<p>{{product.description}}</p>
+						</div>
+						<div style="display:grid;">
+							<span>
+								<strong>Quality</strong> <span class="glyphicon"
+									  ng-class="{'glyphicon-star':product.quality>=star, 'glypicon-star-empty': product.quality < star}"
+									  ng-repeat="star in [1,2,3,4,5]"></span>
+							</span>
+                            <span> <strong>Stock:</strong> {{product.quantity}}</span>
+                            <span> <strong>Seller:</strong> {{product.seller}}</span>
+                            <span style="clear:both;"></span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+<!-- /.container -->

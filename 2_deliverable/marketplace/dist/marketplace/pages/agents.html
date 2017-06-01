@@ -1,0 +1,50 @@
+
+<!-- Page Content -->
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-md-3">
+			<div class="row">
+				<p class="lead">Agents:</p>
+				<div class="list-group">
+					<a ng-repeat="agent in agents"
+					   ng-click="selectAgent(agent)" ng-class="{'active': selected !== null && agent.log==selected.log}"
+					   class="list-group-item">{{agent.name}} </a>
+				</div>
+			</div>
+
+		</div>
+        <div class="col-md-9" ng-show="selected == null">
+            <!-- Nothing to show until an agent is selected -->
+        </div>
+
+		<div class="col-md-9" ng-show="selected != null">
+            <div class="panel panel-default">
+                <div class="panel-heading">Events</div>
+                <div class="panel-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" type="number"
+                               ng-model="moneyDiff" placeholder="Add or subtract money">
+                        <span class="input-group-btn">
+					<button class="btn btn-default"
+                            ng-click="updateMoney(selected.name, moneyDiff)"
+                            type="button">Update Money</button>
+				  </span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Log</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                    <span ng-repeat="line in selected.log"  class="list-group-item">
+                        <strong>{{line.timestamp | date:'HH:mm:ss'}}:</strong> {{line.message}}
+                    </span>
+                    </div>
+			    </div>
+            </div>
+
+		</div>
+	</div>
+</div>

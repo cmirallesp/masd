@@ -14,6 +14,7 @@
             </manifest>
             <fileset dir="${dir.buildfile}/bin"/>
             <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/lib/2apl.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/lib/gson.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="${dir.workspace}/lib/jiprolog/JIProlog.jar"/>
         </jar>
     </target>
