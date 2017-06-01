@@ -5,13 +5,31 @@ include: Common.2apl;
   %initBuyProtocol(0, tablet, 5, 10, producer);
 
 beliefs:
+  bestProduct([], Best, Best).
+  bestProduct([H|T], BestNow, Best):-
+    H = [ProductId, Type, Quality, Price, Seller], is(Score, Quality/Price),
+    Score > BestNow, bestProduct(T, H, Best), !.
+  bestProduct([_|T], BestNow, Best):- bestProduct(T, BestNow, Best).
+  bestProduct([H|T], Best):- bestProduct(T, H, Best).
   role(enduser).
+
+goals:
+  stock(tablet, 1).
+
+pgrules:
+  stock(Type, Stock) <- not(buyProtocolOn(Type)) |
+  {
+    @env(searchProduct(Type), Products);
+    B(bestProduct(Products, [ProductId, Type, Quality, Price, Seller]));
+    initBuyProtocol(ProductId, Type, Quality, Price, Seller);
+  }
 
 pcrules:
   initBuyProtocol(ProductId, Type, Quality, Price, Seller) <-
-    not(confirmationPending(ProductId, _, _, _)) and
+    not(confirmationPending(ProductId, _, _, _, _)) and
     enoughMoney(Price) |
   {
+    +buyProtocolOn(Type);
     send(Seller, request, wantToBuy(ProductId));
     +confirmationPending(ProductId, Type, Quality, Price, Seller);
   }
@@ -19,6 +37,7 @@ pcrules:
   message(Seller, inform, _, _, buyAccepted(ProductId)) <-
     confirmationPending(ProductId, Type, Quality, Price, Seller) |
   {
+    +waitingArrival(ProductId, Type, Quality, Price, Seller);
     -confirmationPending(ProductId, Type, Quality, Price, Seller);
     @env(shipMoney(Seller, ProductId, Price));
     B(money(MoneyBefore) and is(MoneyAfter, MoneyBefore - Price));
@@ -29,7 +48,7 @@ pcrules:
     confirmationPending(ProductId, Type, Quality, Price, Seller) |
   {
     -confirmationPending(ProductId, Type, Quality, Price, Seller);
-    +waitingArrival(ProductId, Type, Quality, Price, Seller);
+    -buyProtocolOn(Type);
   }
 
   event(productTransfer(ProductId, Type, Quality), env) <- true | {
@@ -38,6 +57,7 @@ pcrules:
       -waitingArrival(ProductId, Type, ExpectedQuality, Price, Seller);
       % Do something if the Quality is worse than the ExpectedQuality
       % Do something else if it's the same
+      -buyProtocolOn(Type);
     }
   }
 

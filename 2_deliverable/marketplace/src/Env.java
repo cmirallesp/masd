@@ -330,27 +330,26 @@ public class Env extends Environment {
 
     //exact search for the moment (fuzzy?)
     public Term searchProduct(String agName, APLIdent prodDesc) throws ExternalActionFailedException {
+    	System.out.println("searchProduct()");
     	Agent agent = agents.get(agName);
     	String allowedSellerRole = agent.getRole().equals("store")? "producer" : "store";
         addLog(String.format("Search Product %", prodDesc.toString()), agents.get(agName), null);
-        Product found = null;
+        LinkedList<Term> foundProducts = new LinkedList<>();
         for (Product product : products.values()) {
+        	System.out.println(product.getType());
         	Agent seller = agents.get(product.getOwner());
         	if (product.isOnSale() && product.getType().equals(prodDesc.toString()) && 
         			seller.getRole().equals(allowedSellerRole)) {
-        		found = product;
-        		break;
+        		foundProducts.add(new APLList(new APLNum(product.getId()),
+        									  new APLIdent(product.getType()),
+        									  new APLNum(product.getAnnouncedQuality()),
+        									  new APLNum(product.getPrice()),
+        									  new APLIdent(product.getOwner())));
         	}
         }
-
-        if (found != null) {
-            return new APLList(
-                    new APLNum(found.getId()),
-                    new APLIdent(found.getType()),
-                    new APLNum(found.getAnnouncedQuality()));
-        } else {
-            return new APLList();
-        }
+        System.out.println(foundProducts.size() + " products");
+        // list of lists. Each inner list has the form [ProductId, Type, AnnouncedQuality, Price, Seller]
+        return new APLList(foundProducts);
     }
 
     public Term produceProduct(String agName, APLIdent prodType) throws ExternalActionFailedException {
