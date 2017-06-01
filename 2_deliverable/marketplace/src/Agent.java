@@ -5,11 +5,13 @@ import com.google.gson.JsonObject;
  */
 class Agent extends Logger {
     String name;
+    String role;
     int money;
 
 
-    public Agent(String _name) {
+    public Agent(String _name, String _role) {
         name = _name;
+        role = _role;
     }
 
     String getName() {
@@ -28,9 +30,14 @@ class Agent extends Logger {
 		this.money = money;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
 	JsonObject toJSON() {
         JsonObject object = new JsonObject();
         object.addProperty("name", name);
+        object.addProperty("role", role);
         object.addProperty("money", money);
         object.add("log", this.getJSONLog());
         return object;
