@@ -4,7 +4,7 @@ include: Common.2apl;
 
 beliefupdates:
   % needs: add a certain need
-  {not searchProduct(type)} UpdateNeeds(type) {searchProduct(type)}
+  {not searchProduct(type)} UpdateNeeds(type, quality) {searchProduct(type)}
 
   % items: if there's no such item -- add, remove otherwise
   {not have(id,type,quality)} UpdateItems(id,type,quality) {have(id,type,quality)}
@@ -13,8 +13,8 @@ beliefupdates:
 
 pcrules:
 
-  event(updateNeeds(type), env) <- true | {
-  UpdateNeeds(type);
+  event(updateNeeds(type, quality), env) <- true | {
+  UpdateNeeds(type,quality);
   }
 
 
