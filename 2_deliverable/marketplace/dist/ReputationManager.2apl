@@ -24,10 +24,13 @@ pcrules:
 
   message(Buyer, request,_,_,getReviews(Seller)) <- true |
   {
-    if B(review(Seller,ListOfReviews))
-      send(Buyer, inform, reviewsAnswer(Seller,ListOfReviews));
-    else
-      send(Buyer, inform, reviewsAnswer(Seller,[]));
+    if B(review(Seller,ListOfReviews)){      
+      B(mean(Seller,M));
+      send(Buyer, inform, reviewsAnswer(Seller,M));
+    }
+    else{
+      send(Buyer, inform, reviewsAnswer(Seller,5));
+    }
   }
   
   event(name(Name), env) <- true | {
