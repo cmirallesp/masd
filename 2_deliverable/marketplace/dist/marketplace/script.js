@@ -31,30 +31,6 @@
             agents: []
         };
 
-        object.updateNecessity= (agentName, type, quality) => {
-            $http({
-                method: 'GET',
-                url: '/api/update-necessity',
-                params: {agent: agentName, type : type, quality: quality}
-            }).then((response) => {
-                // Ignore the success
-            }, (response) => {
-                // Ignore the error
-            });
-        };
-
-        object.updateItem = (agentName, id, type, quality) => {
-            $http({
-                method: 'GET',
-                url: '/api/update-item',
-                params: {agent: agentName, id : id, type: type, quality: quality}
-            }).then((response) => {
-                // Ignore the success
-            }, (response) => {
-                // Ignore the error
-            });
-        };
-
         object.updateMoney = (agentName, amount) => {
             $http({
                 method: 'GET',
@@ -151,49 +127,23 @@
 
 	marketplace.controller('agentsController', ['$scope', 'communications', function($scope, communications) {
 		$scope.selected = null
-        $scope.products = communications.products;
-        $scope.reset = function() {
-            $scope.moneyDiff = null;
 
-            $scope.dropItemId = null;
-            $scope.dropItemType = null;
-            $scope.dropItemQuality = null;
-
-
-            $scope.necessity = null;
-            $scope.requiredQuality = null;
-        };
-		$scope.reset();
+		$scope.moneyDiff = null;
 
 		$scope.selectAgent = function(agent) {
 		  $scope.selected = agent;
         };
-
-		$scope.updateItem = function(agentName, id, type, quality=0) {
-            id = parseInt(id);
-            if (isNaN(id)) {
-                alert("Invalid id: "+id);
-            } else {
-                communications.updateItem(agentName, id, type, quality);
-                $scope.reset();
-            }
-        }
-
-        $scope.updateNecessity = function(agentName,  type, quality=0) {
-            communications.updateNecessity(agentName, type, quality);
-            $scope.reset();
-        }
-
-        $scope.updateMoney = function (agentName, amount) {
+		
+		$scope.updateMoney = function (agentName, amount) {
           amount = parseFloat(amount);
           if (isNaN(amount)) {
               alert("Invalid amount: "+amount);
           } else {
               communications.updateMoney(agentName, amount);
-              $scope.reset();
           }
-        };
 
+          $scope.moneyDiff=null;
+        };
 		$scope.agents = communications.agents;
 	}]);
 
