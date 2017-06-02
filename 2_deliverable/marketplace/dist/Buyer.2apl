@@ -77,7 +77,7 @@ pcrules:
       }
       else{
         % not realised that Quality is worse than the ExpectedQuality
-        B( is(Score, 6+int(random(5))) );
+        B( is(Score, 5+int(random(5))) );
         adoptz(sendReview(Seller,Score));
       }
       %adoptz(getReviews(Seller));

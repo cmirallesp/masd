@@ -3,7 +3,7 @@
 
   <agent name="producer1" file="Producer.2apl"/>
   <agent name="store1" file="Store.2apl"/>
-  <agent name="store2" file="Store.2apl"/>
+  <!--<agent name="store2" file="Store.2apl"/>-->
   <agent name="user1" file="EndUser.2apl"/>
   <agent name="user2" file="EndUser.2apl"/>
 
