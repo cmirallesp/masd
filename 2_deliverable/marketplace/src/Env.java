@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -161,10 +162,24 @@ public class Env extends Environment {
 
     }
 
+    public JsonArray getOwnedBy(String agName) {
+        JsonArray arr = new JsonArray();
+        for (Product product : products.values()) {
+            if (product.getOwner().equals(agName)) {
+                arr.add(product.toJSON());
+            }
+        }
+        return arr;
+    }
+
     public JsonArray getAgents() {
         JsonArray arr = new JsonArray();
         for (Agent agent : agents.values()) {
-            arr.add(agent.toJSON());
+            JsonObject ag = agent.toJSON();
+            // Add the products owned by this agent
+            ag.add("belongings", this.getOwnedBy(agent.getName()));
+            arr.add(ag);
+
         }
         return arr;
     }
