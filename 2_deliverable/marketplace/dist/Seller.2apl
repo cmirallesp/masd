@@ -35,8 +35,8 @@ pcrules:
   message(Buyer, request, _, _, wantToBuy(ProductId)) <-
     productAvailable(ProductId) and not(reserved(ProductId, _)) |
   {
-    send(Buyer, inform, buyAccepted(ProductId));
     +reserved(ProductId, Buyer);
+    send(Buyer, inform, buyAccepted(ProductId));
   }
 
   message(Buyer, request, _, _, wantToBuy(ProductId)) <- true |
