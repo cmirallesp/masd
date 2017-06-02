@@ -7,5 +7,5 @@
   <agent name="user1" file="EndUser.2apl"/>
   <agent name="user2" file="EndUser.2apl"/>
 
-  <!--<agent name="reviewer" file="ReputationManager.2apl"/>-->
+  <agent name="reviewer" file="ReputationManager.2apl"/>
 </apaplmas>
