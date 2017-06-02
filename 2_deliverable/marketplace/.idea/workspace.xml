@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4bdffe2-17dd-496b-b64e-6cd16746a48e" name="Default" comment="">
+    <list default="true" id="f4bdffe2-17dd-496b-b64e-6cd16746a48e" name="Default" comment="Final environment, according to Salva...">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Env.java" afterPath="$PROJECT_DIR$/src/Env.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/marketplace/pages/agents.html" afterPath="$PROJECT_DIR$/dist/marketplace/pages/agents.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/marketplace/pages/front.html" afterPath="$PROJECT_DIR$/dist/marketplace/pages/front.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/marketplace/script.js" afterPath="$PROJECT_DIR$/dist/marketplace/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Product.java" afterPath="$PROJECT_DIR$/src/Product.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Env.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Env.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Env.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+            <state relative-caret-position="345">
+              <caret line="174" column="21" lean-forward="false" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
               <folding>
                 <element signature="e#18348#18349#0" expanded="true" />
                 <element signature="e#18404#18405#0" expanded="true" />
@@ -49,17 +52,11 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/marketplace/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-134">
-              <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+            <state relative-caret-position="464">
+              <caret line="81" column="57" lean-forward="false" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
               <folding>
-                <marker date="1496391652960" expanded="true" signature="666:828" ph="{...}" />
-                <marker date="1496391652960" expanded="true" signature="4448:4492" ph="{...}" />
-                <marker date="1496391652960" expanded="true" signature="4448:4493" ph="[...]" />
-                <marker date="1496391652960" expanded="true" signature="4538:4904" ph="[...]" />
-                <marker date="1496391652960" expanded="true" signature="4582:4903" ph="{...}" />
-                <marker date="1496391652960" expanded="true" signature="4620:4689" ph="{&quot;method&quot;: 'GET'...}" />
-                <marker date="1496391652960" expanded="true" signature="4731:4820" ph="{...}" />
-                <marker date="1496391652960" expanded="true" signature="4855:4898" ph="{...}" />
+                <marker date="1496393357888" expanded="true" signature="666:828" ph="{...}" />
+                <marker date="1496393357888" expanded="true" signature="6147:6191" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -75,14 +72,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="agents.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="agents.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dist/marketplace/pages/agents.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="45" column="18" lean-forward="false" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
+            <state relative-caret-position="255">
+              <caret line="88" column="15" lean-forward="true" selection-start-line="88" selection-start-column="15" selection-end-line="88" selection-end-column="15" />
               <folding>
-                <marker date="1496391652957" expanded="true" signature="1686:1695" ph="..." />
-                <marker date="1496391652957" expanded="true" signature="1686:1714" ph="..." />
+                <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="front.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dist/marketplace/pages/front.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="389">
+              <caret line="21" column="90" lean-forward="false" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h4#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Product.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Product.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="86" column="52" lean-forward="false" selection-start-line="86" selection-start-column="52" selection-end-line="86" selection-end-column="52" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1150#1151#0" expanded="true" />
+                <element signature="e#1187#1188#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,26 +143,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.mas" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/config.mas">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="42" lean-forward="false" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Producer.2apl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dist/Producer.2apl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="30" column="2" lean-forward="false" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Common.2apl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dist/Common.2apl">
           <provider selected="true" editor-type-id="text-editor">
@@ -159,11 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>IOUtil</find>
-      <find>stringify</find>
-      <find>System.out</find>
-      <find>replacer</find>
-      <find>products</find>
       <find>product</find>
       <find>qty =</find>
       <find>qty</find>
@@ -187,8 +187,13 @@
       <find>posses</find>
       <find>possess</find>
       <find>updat</find>
-      <find>have</find>
       <find>have(</find>
+      <find>have</find>
+      <find>owner =</find>
+      <find>setOwner</find>
+      <find>onSale</find>
+      <find>getAgent</find>
+      <find>last_modified</find>
     </findStrings>
     <replaceStrings>
       <replace>object</replace>
@@ -211,14 +216,10 @@
         <option value="$PROJECT_DIR$/bin/Env.class" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/build.xml" />
-        <option value="$PROJECT_DIR$/dist/marketplace/pages/front.html" />
         <option value="$PROJECT_DIR$/src/Agent.java" />
         <option value="$PROJECT_DIR$/src/EventLog.java" />
-        <option value="$PROJECT_DIR$/src/Product.java" />
         <option value="$PROJECT_DIR$/src/Logger.java" />
         <option value="$PROJECT_DIR$/dist/marketplace/index.html" />
-        <option value="$PROJECT_DIR$/dist/marketplace/script.js" />
-        <option value="$PROJECT_DIR$/dist/marketplace/pages/agents.html" />
         <option value="$PROJECT_DIR$/dist/marketplace/pages/log.html" />
         <option value="$PROJECT_DIR$/dist/Common.2apl" />
         <option value="$PROJECT_DIR$/dist/ReputationManager.2apl" />
@@ -229,6 +230,10 @@
         <option value="$PROJECT_DIR$/dist/config.mas" />
         <option value="$PROJECT_DIR$/dist/EndUser.2apl" />
         <option value="$PROJECT_DIR$/src/Env.java" />
+        <option value="$PROJECT_DIR$/src/Product.java" />
+        <option value="$PROJECT_DIR$/dist/marketplace/script.js" />
+        <option value="$PROJECT_DIR$/dist/marketplace/pages/front.html" />
+        <option value="$PROJECT_DIR$/dist/marketplace/pages/agents.html" />
       </list>
     </option>
   </component>
@@ -293,20 +298,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="marketplace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="2apl.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -921,11 +912,18 @@
       <option name="project" value="LOCAL" />
       <updated>1495985555158</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Pre-merge commit">
+      <created>1496392550611</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1496392550611</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37115000" />
+    <option name="totallyTimeSpent" value="39662000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -949,7 +947,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.50427353" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.342312" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116722785" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.4957265" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33913043" sideWeight="0.49786323" order="7" side_tool="false" content_ui="tabs" />
@@ -959,7 +957,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2784091" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.090097405" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1010,6 +1008,14 @@
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
               </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
             </State>
           </value>
         </entry>
@@ -1031,7 +1037,8 @@
     <MESSAGE value="The the basic page kind of works" />
     <MESSAGE value="Lots of changes. No placeholder no nothing." />
     <MESSAGE value="Didn't do git add. I am just stupid..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Didn't do git add. I am just stupid..." />
+    <MESSAGE value="Pre-merge commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pre-merge commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1107,6 +1114,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="28" column="34" lean-forward="false" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1258,46 +1268,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dist/marketplace/pages/front.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="19" column="57" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/marketplace/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="860">
           <caret line="43" column="8" lean-forward="false" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/marketplace/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-134">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding>
-            <marker date="1496391652960" expanded="true" signature="666:828" ph="{...}" />
-            <marker date="1496391652960" expanded="true" signature="4448:4492" ph="{...}" />
-            <marker date="1496391652960" expanded="true" signature="4448:4493" ph="[...]" />
-            <marker date="1496391652960" expanded="true" signature="4538:4904" ph="[...]" />
-            <marker date="1496391652960" expanded="true" signature="4582:4903" ph="{...}" />
-            <marker date="1496391652960" expanded="true" signature="4620:4689" ph="{&quot;method&quot;: 'GET'...}" />
-            <marker date="1496391652960" expanded="true" signature="4731:4820" ph="{...}" />
-            <marker date="1496391652960" expanded="true" signature="4855:4898" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/marketplace/pages/agents.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="45" column="18" lean-forward="false" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="18" />
-          <folding>
-            <marker date="1496391652957" expanded="true" signature="1686:1695" ph="..." />
-            <marker date="1496391652957" expanded="true" signature="1686:1714" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1343,6 +1317,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="28" column="34" lean-forward="false" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1350,6 +1327,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1357,6 +1335,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="7" lean-forward="false" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1384,20 +1363,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="58" column="22" lean-forward="false" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1016#1017#0" expanded="false" />
-            <element signature="e#1045#1046#0" expanded="false" />
-            <element signature="e#1077#1078#0" expanded="false" />
-            <element signature="e#1102#1103#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/Seller.2apl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1406,16 +1371,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Env.java">
+    <entry file="file://$PROJECT_DIR$/src/Product.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
-          <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+          <caret line="86" column="52" lean-forward="false" selection-start-line="86" selection-start-column="52" selection-end-line="86" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1150#1151#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Env.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="174" column="21" lean-forward="false" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
           <folding>
             <element signature="e#18348#18349#0" expanded="true" />
             <element signature="e#18404#18405#0" expanded="true" />
             <marker date="1496392531562" expanded="false" signature="20269:20299" ph="/unchecked/" />
             <marker date="1496392531562" expanded="false" signature="20541:20549" ph="&lt;~&gt;" />
             <marker date="1496392531562" expanded="false" signature="25402:25418" ph="&lt;~&gt;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/marketplace/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="81" column="57" lean-forward="false" selection-start-line="81" selection-start-column="57" selection-end-line="81" selection-end-column="57" />
+          <folding>
+            <marker date="1496393357888" expanded="true" signature="666:828" ph="{...}" />
+            <marker date="1496393357888" expanded="true" signature="6147:6191" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/marketplace/pages/front.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="21" column="90" lean-forward="false" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/marketplace/pages/agents.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="88" column="15" lean-forward="true" selection-start-line="88" selection-start-column="15" selection-end-line="88" selection-end-column="15" />
+          <folding>
+            <element signature="n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

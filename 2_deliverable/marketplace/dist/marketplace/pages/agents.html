@@ -1,25 +1,24 @@
-
 <!-- Page Content -->
 <div class="container">
 
-	<div class="row">
+    <div class="row">
 
-		<div class="col-md-3">
-			<div class="row">
-				<p class="lead">Agents:</p>
-				<div class="list-group">
-					<a ng-repeat="agent in agents"
-					   ng-click="selectAgent(agent)" ng-class="{'active': selected !== null && agent.log==selected.log}"
-					   class="list-group-item">{{agent.name}} </a>
-				</div>
-			</div>
+        <div class="col-md-3">
+            <div class="row">
+                <p class="lead">Agents:</p>
+                <div class="list-group">
+                    <a ng-repeat="agent in agents"
+                       ng-click="selectAgent(agent)" ng-class="{'active': selected !== null && agent.log==selected.log}"
+                       class="list-group-item">{{agent.name}} </a>
+                </div>
+            </div>
 
-		</div>
+        </div>
         <div class="col-md-9" ng-show="selected == null">
             <!-- Nothing to show until an agent is selected -->
         </div>
 
-		<div class="col-md-9" ng-show="selected != null">
+        <div class="col-md-9" ng-show="selected != null">
             <div class="panel panel-default">
                 <div class="panel-heading">Events</div>
                 <div class="panel-body">
@@ -34,17 +33,19 @@
                           </span>
                         </div>
                     </form>
-                </div> <div class="panel-body">
+                </div>
+
+                <div class="panel-body">
 
                     <form class="form-inline">
                         <div class="form-group">
                             <input class="form-control" type="text"
                                    ng-model="dropItemType" placeholder="Type">
                         </div>
-                            <div class="form-group">
-                                <input class="form-control" type="number"
-                                       ng-model="dropItemQuality" placeholder="Quality">
-                            </div>
+                        <div class="form-group">
+                            <input class="form-control" type="number"
+                                   ng-model="dropItemQuality" placeholder="Quality">
+                        </div>
 
                         <div class="input-group">
                             <input class="form-control" type="number"
@@ -57,7 +58,9 @@
                         </div>
                     </form>
 
-            </div> <div class="panel-body">
+                </div>
+
+                <div class="panel-body">
 
                     <form class="form-inline">
                         <div class="form-group">
@@ -78,29 +81,44 @@
 
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Log</div>
-                <div class="panel-body">
-                    <div class="list-group">
-                    <span ng-repeat="line in selected.log"  class="list-group-item">
-                        <strong>{{line.timestamp | date:'HH:mm:ss'}}:</strong> {{line.message}}
-                    </span>
-                    </div>
-			    </div>
-            </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading">Products On Sale</div>
-                <div class="panel-body">
+                <div class="panel-heading" ng-click="hideProducts=!hideProducts;">Products Owned
+                    <i class="fa" style="float: right; font-size: 20px;"
+                       ng-class="{'fa-compress': !hideProducts, 'fa-expand': hideProducts}"
+                       aria-hidden="true"></i></div>
+                <div class="panel-body" ng-class="{'collapse': hideProducts}">
                     <div class="list-group">
-                        <span ng-repeat="product in products | filter: { owner: selected.name } : false"
+                        <span ng-repeat="product in selected.belongings"
                               class="list-group-item">
-                            {{product.name}} ({{product.id}}): <strong>${{product.price}}</strong>
+                            <strong>{{product.name}} ({{product.id}})</strong>
+                            <span class="glyphicon"
+                                  ng-class="{'glyphicon-star':product.quality>=star, 'glypicon-star-empty': product.quality < star}"
+                                  ng-repeat="star in [1,2,3,4,5]"></span>
+                            <span ng-if="product.on_sale">(On sale for ${{product.price}})</span>
                         </span>
                     </div>
                 </div>
             </div>
 
-		</div>
-	</div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" ng-click="hideLog=!hideLog;">Log
+                    <i class="fa" style="float: right; font-size: 20px;"
+                       ng-class="{'fa-compress': !hideLog, 'fa-expand': hideLog}"
+                       aria-hidden="true"></i></div>
+                <div class="panel-body" ng-class="{'collapse': hideLog}">
+                    <div class="list-group">
+                    <span ng-repeat="line in selected.log" class="list-group-item">
+                        <strong>{{line.timestamp | date:'HH:mm:ss'}}:</strong> {{line.message}}
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
 </div>

@@ -79,6 +79,7 @@
                     } else {
                         // Just update the log
                         agent.log = ag.log;
+                        agent.belongings = ag.belongings;
                     }
                 }
             }, function errorCallback(response) {

@@ -84,6 +84,7 @@ class Product extends Logger {
 	}
 
 	public void setOwner(String owner) {
+        System.out.println(this.owner+" -> "+owner);
 		this.owner = owner;
 	}
 
@@ -125,6 +126,8 @@ class Product extends Logger {
     JsonObject toJSON() {
         JsonObject obj = new JsonObject();
         obj.addProperty("id", id);
+
+        obj.addProperty("on_sale", onSale);
 
         obj.addProperty("name", desc);
         obj.addProperty("description", fullDescription);
