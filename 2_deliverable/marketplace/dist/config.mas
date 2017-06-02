@@ -1,7 +1,6 @@
 <apaplmas>
   <environment name="env" file="Environment2APL.jar"/>
 
-  <!--<agent name="common" file="Common.2apl"/>-->
   <agent name="producer1" file="Producer.2apl"/>
   <agent name="store1" file="Store.2apl"/>
   <agent name="store2" file="Store.2apl"/>

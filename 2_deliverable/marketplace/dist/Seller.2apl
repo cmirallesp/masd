@@ -49,7 +49,12 @@ pcrules:
     B(is(MoneyAfter, MoneyBefore + Transfer));
     UpdateMoney(MoneyAfter);
     @env(shipProduct(Buyer, ProductId));
-    RemoveFromSale(ProductId);
+    -reserved(ProductId, Buyer);
     RemoveItem(ProductId);
-  }
+    RemoveFromSale(ProductId);
+    }
+
+prrules:
+  @env(shipProduct(Buyer, ProductId)); REST; <- true | { B(true); }
+
 

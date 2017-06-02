@@ -20,7 +20,7 @@ beliefs:
   x(console3, 300).
   x(console4, 200).
   x(manual_1, 20).
-  x(manual_1, 100).
+  x(manual_2, 100).
   x(forehead_thermometer_1, 30).
   x(forehead_thermometer_1, 40).
   x(forehead_thermometer_1, 50).

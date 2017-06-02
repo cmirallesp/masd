@@ -19,7 +19,7 @@ beliefs:
   productionPrice(console3, 50).
   productionPrice(console4, 60).
   productionPrice(manual_1, 10).
-  productionPrice(manual_1, 57).
+  productionPrice(manual_2, 57).
   productionPrice(forehead_thermometer_1, 15).
   productionPrice(forehead_thermometer_1, 20).
   productionPrice(forehead_thermometer_1, 25).
