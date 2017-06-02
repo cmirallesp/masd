@@ -23,15 +23,59 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Events</div>
                 <div class="panel-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" type="number"
-                               ng-model="moneyDiff" placeholder="Add or subtract money">
-                        <span class="input-group-btn">
-					<button class="btn btn-default"
-                            ng-click="updateMoney(selected.name, moneyDiff)"
-                            type="button">Update Money</button>
-				  </span>
-                    </div>
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input class="form-control" type="number"
+                                   ng-model="moneyDiff" placeholder="Add or subtract money">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    ng-click="updateMoney(selected.name, moneyDiff)"
+                                    type="button">Update Money</button>
+                          </span>
+                        </div>
+                    </form>
+                </div> <div class="panel-body">
+
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input class="form-control" type="text"
+                                   ng-model="dropItemType" placeholder="Type">
+                        </div>
+                            <div class="form-group">
+                                <input class="form-control" type="number"
+                                       ng-model="dropItemQuality" placeholder="Quality">
+                            </div>
+
+                        <div class="input-group">
+                            <input class="form-control" type="number"
+                                   ng-model="dropItemId" placeholder="Id">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    ng-click="updateItem(selected.name, dropItemId, dropItemType, dropItemQuality)"
+                                    type="button">Drop Item</button>
+                          </span>
+                        </div>
+                    </form>
+
+            </div> <div class="panel-body">
+
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input class="form-control" type="number"
+                                   ng-model="requiredQuality" placeholder="Quality (optional)">
+                        </div>
+                        <div class="input-group">
+                            <input class="form-control" type="text"
+                                   ng-model="necessity" placeholder="Necessity Type">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    ng-click="updateNecessity(selected.name, necessity, requiredQuality)"
+                                    type="button">Update Necessity</button>
+                          </span>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
             <div class="panel panel-default">
@@ -43,6 +87,18 @@
                     </span>
                     </div>
 			    </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Products On Sale</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <span ng-repeat="product in products | filter: { owner: selected.name } : false"
+                              class="list-group-item">
+                            {{product.name}} ({{product.id}}): <strong>${{product.price}}</strong>
+                        </span>
+                    </div>
+                </div>
             </div>
 
 		</div>
