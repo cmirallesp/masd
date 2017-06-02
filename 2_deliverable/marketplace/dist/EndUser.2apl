@@ -1,10 +1,12 @@
 include: Buyer.2apl;
 include: Common.2apl;
 
+beliefs:
+  role(enduser).
 
 beliefupdates:
   % needs: add a certain need
-  {not searchProduct(Type)} UpdateNeeds(Type, Quality) {searchProduct(Type)}
+  %{not searchProduct(Type)} UpdateNeeds(Type, Quality) {searchProduct(Type)}
 
   % items: if there's no such item -- add, remove otherwise
   {not have(Id,Type, Quality)} UpdateItems(Id,Type,Quality) {have(Id,Type,Quality)}
@@ -12,11 +14,6 @@ beliefupdates:
 
 
 pcrules:
-
-  event(updateNeeds(Type, Quality), env) <- true | {
-    UpdateNeeds(Type, Quality);
-  }
-
 
   event(updateItems(Id, Type, Quality), env) <- true | {
     UpdateItems(Id, Type, Quality);

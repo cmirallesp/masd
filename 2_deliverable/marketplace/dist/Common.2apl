@@ -3,7 +3,6 @@ plans:
   @env(enterMarket(Role), _);
 
 beliefs:
-  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
   % Product types
   type(smartphone1).
   type(smartphone2).
@@ -14,6 +13,16 @@ beliefs:
   type(console2).
   type(console3).
   type(console4).
+  type(manual_1).
+  type(manual_1).
+  type(forehead_thermometer_1).
+  type(forehead_thermometer_1).
+  type(forehead_thermometer_1).
+  type(humidifier_1).
+  type(humidifier_1).
+  type(camera_1).
+  type(camera_2).
+  type(camera_3).
   money(0).
   recommendedPrice(Type, Qlty, Price):- type(Type), x(Type, X),
                                         is(Price, int(X*(5.0+Qlty)/10.0)).

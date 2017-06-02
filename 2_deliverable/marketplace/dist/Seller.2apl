@@ -1,6 +1,6 @@
-include: Common.2apl;
 
 beliefs:
+  stock(Type, Stock):- findall(1, have(_, Type, _), List), length(List, Stock).
   retailPrice(Type, Quality, Price):- type(Type), stock(Type, Stock), c(C), lambda(Lambda),
                                       recommendedPrice(Type, Quality, RPrice),
                                       is(Price, RPrice + int(C*exp(-Lambda*Stock))).
@@ -21,8 +21,13 @@ beliefupdates:
 pgrules:
   gainMoney <- have(Id, Type, Quality) and not(onSale(Id, _)) and not(reserved(Id, _)) |
   {
-    B(retailPrice(Type, Quality, Price));
-    @env(putOnSale(Id, Quality, Price));
+    if B(roll(0.2)) { % Announce higher quality to gain more money (risky)
+      B(is(AnnouncedQuality, Quality + int(random(11-Quality))));
+    } else {
+      B(AnnouncedQuality = Quality);
+    }
+    B(retailPrice(Type, AnnouncedQuality, Price));
+    @env(putOnSale(Id, AnnouncedQuality, Price));
     PutOnSale(Id, Price);
   }
 

@@ -2,9 +2,48 @@ include: Seller.2apl;
 include: Buyer.2apl;
 include: Common.2apl;
 
+beliefs:
+  shouldAcquire(Type, Remaining):- type(Type), stock(Type, Stock), minimumStock(Minimum),
+                                  Stock < Minimum, is(Remaining, Minimum - Stock).
+
+  minimumStock(2).
+  % Selling constants
+  c(100).
+  lambda(1).
+  x(smartphone1, 600).
+  x(smartphone2, 300).
+  x(smartphone3, 400).
+  x(smartwatch, 100).
+  x(tablet, 500).
+  x(console1, 400).
+  x(console2, 200).
+  x(console3, 300).
+  x(console4, 200).
+  x(manual_1, 20).
+  x(manual_1, 100).
+  x(forehead_thermometer_1, 30).
+  x(forehead_thermometer_1, 40).
+  x(forehead_thermometer_1, 50).
+  x(humidifier_1, 60).
+  x(humidifier_1, 70).
+  x(camera_1, 40).
+  x(camera_2, 80).
+  x(camera_3, 120).
+  role(store).
+
+goals:
+  maintainStock.
+
+pgrules:
+  maintainStock <- shouldAcquire(Type, Remaining) and
+                   not(needToAcquire(Type, Remaining)) and
+                   not(buyProtocolOn(Type)) |
+  {
+    UpdateNeed(Type, Remaining);
+  }
 
 pcrules:
   % UpdateOnSale(Id, Qty) is declared inside Seller.2apl
-  event(stocksSensor(Id,Qty), env) <- true | {
-    UpdateOnSale(Id,Qty);
-  }
+  %event(stocksSensor(Id,Qty), env) <- true | {
+    %UpdateOnSale(Id,Qty);
+  %}

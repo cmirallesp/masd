@@ -233,12 +233,12 @@ public class Env extends Environment {
         APLFunction event = new APLFunction("name", aplagName);
 
         // If we throw an event, we always need to throw an APLFunction.
-        throwEvent(event, agName);
+        notifyAgents(event, agName);
 
 //        addLog("Agent registered to environment", agents.get(agName), null);
 
         // note: we can also throw an event to all agents by letting out the last parameter:
-        // throwEvent(event);
+        // notifyAgents(event);
 
         // If the environment was not running, make it run
         if (this.server == null) {
@@ -368,10 +368,9 @@ public class Env extends Environment {
     			product.setRealQuality(quality);
     			product.setOwner(agName);
     			products.put(id, product);
-                agent.setMoney(agent.getMoney() - price);
                 // Even if the agent updates its belief after executing this action, fire an UpdateMoney
                 // event just in case
-                updateMoney(agName, agent.getMoney());
+                updateMoney(agName, agent.getMoney() - price);
                 return new APLList(new APLNum(id), prodType, new APLNum(quality));
     		} else {
     			String msg = "Agent " + agName + " has not enough money to produce " + prodType;
@@ -396,7 +395,7 @@ public class Env extends Environment {
     	agent.setMoney(agent.getMoney() - money.toInt());
     	receiver.setMoney(receiver.getMoney() + money.toInt());
     	APLFunction event = new APLFunction("moneyTransfer", money, concept);
-    	throwEvent(event, receiver.getName());
+    	notifyAgents(event, receiver.getName());
         addLog(String.format("Ship money $%d (%s -> %s)", money.toInt(), agName, dst.toString()), agents.get(agName), null);
 
         return null;
@@ -413,7 +412,7 @@ public class Env extends Environment {
     	boolean bluffUncovered = rng.nextInt(100) < probabilityRealizing;
     	int notifiedQuality = bluffUncovered? prod.getRealQuality() : prod.getAnnouncedQuality();
     	APLFunction event = new APLFunction("productTransfer", product, new APLIdent(prod.getType()), new APLNum(notifiedQuality));
-    	throwEvent(event, dst.toString());
+    	notifyAgents(event, dst.toString());
 
         addLog(String.format("Ship product %d (%s -> %s)", product.toInt(), agName, dst.toString()), agName, product.toInt());
     	return null;
@@ -421,28 +420,29 @@ public class Env extends Environment {
     
     public Term enterMarket(String agName, APLIdent role) throws ExternalActionFailedException {
     	Agent agent = new Agent(agName, role.toString());
+    	int startMoney = 0;
     	switch (role.toString()) {
     	case "producer":
-    		agent.setMoney(300);
+    		startMoney = 5000;
     		break;
     	case "store":
-    		agent.setMoney(200);
+    		startMoney = 5000;
     		break;
     	case "enduser":
-    		agent.setMoney(100);
+    		startMoney = 1000;
     		break;
     	default:
     		throw new ExternalActionFailedException("Unknown role: " + role.toString());
     	}
     	agents.put(agName, agent);
-    	updateMoney(agName, agent.getMoney());
+    	updateMoney(agName, startMoney);
     	return null;
     }
 
     public void updateNeeds(String agName, String productType, int minQuality) {
         APLFunction event = new APLFunction("updateNeeds", new APLIdent(productType), new APLNum(minQuality));
         // If we throw an event, we always need to throw an APLFunction.
-        throwEvent(event, agName);
+        notifyAgents(event, agName);
         addLog("Update needs "+productType, agents.get(agName), null);
     }
 
@@ -453,7 +453,7 @@ public class Env extends Environment {
     public void updateItems(String agName, int id, String type, int quality) {
         APLFunction event = new APLFunction("updateItems", new APLNum(id), new APLIdent(type), new APLNum(quality));
         // If we throw an event, we always need to throw an APLFunction.
-        throwEvent(event, agName);
+        notifyAgents(event, agName);
         addLog(String.format("Update products %s (%d) [q=%d]",type,id, quality), agents.get(agName), null);
 
     }
@@ -461,7 +461,8 @@ public class Env extends Environment {
     public void updateMoney(String agName, int amount) {
         APLFunction event = new APLFunction("updateMoney", new APLNum(amount));
         // If we throw an event, we always need to throw an APLFunction.
-        throwEvent(event, agName);
+        agents.get(agName).setMoney(amount);
+        this.notifyAgents(event, agName);
         addLog(String.format("Update money $%d", amount), agents.get(agName), null);
     }
     

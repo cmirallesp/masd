@@ -1,23 +1,20 @@
-include: Common.2apl;
-
 %plans:
   %wait(5);
   %initBuyProtocol(0, tablet, 5, 10, producer);
 
 beliefs:
-  bestProduct([], Best, Best).
-  bestProduct([H|T], BestNow, Best):-
-    H = [ProductId, Type, Quality, Price, Seller], is(Score, Quality/Price),
-    Score > BestNow, bestProduct(T, H, Best), !.
-  bestProduct([_|T], BestNow, Best):- bestProduct(T, BestNow, Best).
-  bestProduct([H|T], Best):- bestProduct(T, H, Best).
-  role(store).
+  bestProduct([], _, Best, Best).
+  bestProduct([H|T], BestScoreNow, BestNow, Best):- H = [_, _, Quality, Price, _],
+    is(Score, Quality/Price), Score > BestScoreNow, bestProduct(T, Score, H, Best), !.
+  bestProduct([_|T], BestScoreNow, BestNow, Best):- bestProduct(T, BestScoreNow, BestNow, Best).
+  bestProduct([H|T], Best):- H = [_, _, Quality, Price, _],
+    is(Score, Quality/Price), bestProduct(T, Score, H, Best).
 
 goals:
-  stock(tablet, 1).
+  satisfyNeed.
 
 pgrules:
-  stock(Type, Stock) <- not(buyProtocolOn(Type)) |
+  satisfyNeed <- needToAcquire(Type, Qty) and Qty > 0 and not(buyProtocolOn(Type)) |
   {
     @env(searchProduct(Type), Products);
     B(bestProduct(Products, [ProductId, Type, Quality, Price, Seller]));
@@ -65,24 +62,34 @@ pcrules:
 
   event(productTransfer(ProductId, Type, Quality), env) <- true | {
     AddItem(ProductId, Type, Quality);
+    if B(needToAcquire(Type, OldNeed)) {
+      B(is(Need, OldNeed - 1));
+      UpdateNeed(Type, Need);
+    }
     if (B(waitingArrival(ProductId, Type, ExpectedQuality, Price, Seller))) {
       -waitingArrival(ProductId, Type, ExpectedQuality, Price, Seller);
-      % Do something if the Quality is worse than the ExpectedQuality
-      % Do something else if it's the same
       -buyProtocolOn(Type);
 
-      B(is(P_realised,abs(Quality-ExpectedQuality )/10));
-      if(B( roll(P_realised))){
+      if (Quality < ExpectedQuality) {
         % realised that Quality is worse than the ExpectedQuality
-        B(is(Score, random(4.0)));
-        adoptz(sendReview(Seller, Score));        
+        B( is(Score, int(random(5))) );
+        %adoptz(sendReview(Seller, Score));        
       }
       else{
         % not realised that Quality is worse than the ExpectedQuality
-        B(is(Score, (5+random(5.0))));
-        adoptz(sendReview(Seller,Score));
+        B( is(Score, 6+int(random(5))) );
+        %adoptz(sendReview(Seller,Score));
       }
-      adoptz(getReviews(Seller));
+      %adoptz(getReviews(Seller));
+    }
+  }
+
+  event(updateNeeds(Type, _), env) <- true | {
+    if B(needToAcquire(Type, OldQty)) {
+      B(is(NewQty, OldQty + 1));
+      UpdateNeed(Type, NewQty);
+    } else {
+      UpdateNeed(Type, 1);
     }
   }
 
@@ -92,10 +99,18 @@ pcrules:
   }
 
 
+
+beliefupdates:
+  { needToAcquire(Type, OldNeed) }
+    UpdateNeed(Type, Need)
+  { not needToAcquire(Type, OldNeed) and needToAcquire(Type, Need) }
+
+  { not(needToAcquire(Type, _)) } UpdateNeed(Type, Need) { needToAcquire(Type, Need) }
+
 prrules:
   B(bestProduct(Products, Best)); REST; <- true |
   {
-    wait(3);
+    wait(2);
   }
 
 %goals:

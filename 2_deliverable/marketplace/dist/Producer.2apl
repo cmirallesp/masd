@@ -1,4 +1,5 @@
 include: Seller.2apl;
+include: Common.2apl;
 
 beliefs:
   canProduce(ProdType):- type(ProdType), productionPrice(ProdType, Price), enoughMoney(Price).
@@ -9,13 +10,24 @@ beliefs:
   x(Type, X):- type(Type), productionPrice(Type, ProductionPrice), is(X, int(1.2*ProductionPrice)).
   % Production prices
   productionPrice(smartphone1, 70).
-  productionPrice(smartphone1, 50).
-  productionPrice(smartphone1, 60).
+  productionPrice(smartphone2, 50).
+  productionPrice(smartphone3, 60).
+  productionPrice(smartwatch, 20).
   productionPrice(tablet, 70).
   productionPrice(console1, 50).
   productionPrice(console2, 70).
   productionPrice(console3, 50).
   productionPrice(console4, 60).
+  productionPrice(manual_1, 10).
+  productionPrice(manual_1, 57).
+  productionPrice(forehead_thermometer_1, 15).
+  productionPrice(forehead_thermometer_1, 20).
+  productionPrice(forehead_thermometer_1, 25).
+  productionPrice(humidifier_1, 30).
+  productionPrice(humidifier_1, 35).
+  productionPrice(camera_1, 20).
+  productionPrice(camera_2, 40).
+  productionPrice(camera_3, 60).
   
   role(producer).
 
